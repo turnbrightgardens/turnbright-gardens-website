@@ -381,6 +381,16 @@ h3 {
     url("assets/employee-pressure-washing.jpeg") center 35% / cover no-repeat;
 }
 
+.thank-you-hero {
+  min-height: calc(100svh - 170px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background:
+    linear-gradient(90deg, rgba(14, 26, 18, 0.94), rgba(14, 26, 18, 0.72)),
+    url("assets/gardening-lawn-mowing-service.jpeg") center / cover no-repeat;
+}
+
 .text-link {
   align-self: center;
   color: var(--leaf);
