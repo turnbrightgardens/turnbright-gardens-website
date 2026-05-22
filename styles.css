@@ -295,22 +295,31 @@ h3 {
 .stat-row {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1px;
-  overflow: hidden;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.14);
+  gap: 16px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
 }
 
 .stat-row span {
-  min-height: 70px;
-  display: grid;
-  place-items: center;
-  padding: 14px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 0;
+  padding-left: 18px;
   color: var(--white);
-  background: rgba(255, 255, 255, 0.07);
-  text-align: center;
-  font-weight: 800;
-  font-size: 14px;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.35;
+}
+
+.stat-row span::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--gold);
 }
 
 .section {
@@ -405,7 +414,10 @@ h3 {
 }
 
 .pressure-heading {
-  margin-top: 58px;
+  max-width: none;
+  margin-top: 64px;
+  padding-top: 40px;
+  border-top: 1px solid rgba(18, 53, 30, 0.12);
 }
 
 .section-heading.split {
