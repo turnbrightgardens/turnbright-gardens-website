@@ -89,7 +89,7 @@ a {
 .nav-links {
   display: flex;
   align-items: center;
-  gap: clamp(14px, 3vw, 32px);
+  gap: clamp(12px, 2.4vw, 26px);
   font-size: 14px;
   font-weight: 700;
 }
@@ -159,8 +159,8 @@ a {
   padding: 130px clamp(20px, 6vw, 80px) 74px;
   color: var(--white);
   background:
-    linear-gradient(90deg, rgba(10, 23, 14, 0.9), rgba(10, 23, 14, 0.46) 48%, rgba(10, 23, 14, 0.22)),
-    url("assets/garden-finish.jpeg") center / cover no-repeat;
+    radial-gradient(circle at 78% 18%, rgba(231, 182, 74, 0.24), transparent 32%),
+    linear-gradient(135deg, #0e1a12 0%, #16321f 48%, #293126 100%);
 }
 
 .hero-content {
@@ -342,7 +342,7 @@ h3 {
   width: 7px;
   height: 7px;
   border-radius: 999px;
-  background: var(--gold);
+  background: var(--sun);
 }
 
 .section {
@@ -379,6 +379,12 @@ h3 {
   background:
     linear-gradient(90deg, rgba(14, 26, 18, 0.94), rgba(14, 26, 18, 0.74)),
     url("assets/employee-pressure-washing.jpeg") center 35% / cover no-repeat;
+}
+
+.clearance-hero {
+  background:
+    linear-gradient(90deg, rgba(14, 26, 18, 0.94), rgba(14, 26, 18, 0.62)),
+    url("assets/house-clearance-sofa-team.png") center / cover no-repeat;
 }
 
 .thank-you-hero {
@@ -467,6 +473,141 @@ h3 {
   gap: 1px;
   border: 1px solid var(--line);
   background: var(--line);
+}
+
+.service-paths {
+  padding-bottom: 0;
+}
+
+.service-path-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.service-path-card {
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  min-height: 390px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+  box-shadow: 0 18px 48px rgba(18, 53, 30, 0.1);
+}
+
+.service-path-card img {
+  min-width: 0;
+}
+
+.service-path-card div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(22px, 4vw, 34px);
+}
+
+.service-path-card h3 {
+  font-size: clamp(25px, 2.7vw, 34px);
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.service-path-card p:not(.tag) {
+  color: var(--muted);
+}
+
+.service-path-card .button {
+  align-self: flex-start;
+  margin-top: 12px;
+}
+
+.clearance-intro {
+  margin-top: 0;
+}
+
+.clearance-intro img {
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.price-guide-section {
+  padding-top: 0;
+}
+
+.price-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+  box-shadow: 0 18px 48px rgba(18, 53, 30, 0.1);
+}
+
+.clearance-price-table {
+  width: 100%;
+  min-width: 860px;
+  border-collapse: collapse;
+  background: var(--white);
+}
+
+.clearance-price-table th {
+  padding: 16px 18px;
+  color: var(--white);
+  background: var(--leaf);
+  font-size: 14px;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.clearance-price-table th:not(:first-child),
+.clearance-price-table td:not(:first-child) {
+  text-align: center;
+}
+
+.clearance-price-table td {
+  padding: 14px 18px;
+  border-top: 1px solid rgba(23, 32, 26, 0.1);
+  color: var(--ink);
+  font-size: 16px;
+}
+
+.clearance-price-table td:not(:first-child) {
+  color: var(--leaf-deep);
+  font-size: 19px;
+  font-weight: 900;
+}
+
+.full-clearance-card {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 28px;
+  align-items: center;
+  margin-top: 22px;
+  padding: clamp(22px, 4vw, 34px);
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--leaf-deep), #244e2d);
+  color: var(--white);
+  box-shadow: var(--shadow);
+}
+
+.full-clearance-card .eyebrow {
+  color: var(--sun);
+}
+
+.full-clearance-card h3 {
+  font-size: clamp(34px, 5vw, 58px);
+}
+
+.full-clearance-card p,
+.full-clearance-card li {
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.price-disclaimer {
+  max-width: 900px;
+  margin: 20px 0 0;
+  color: var(--muted);
+  font-size: 15px;
 }
 
 .compact-grid {
@@ -1069,7 +1210,13 @@ h3 {
   .intro-grid,
   .feature-work,
   .service-spotlight,
-  .proof-section {
+  .proof-section,
+  .service-path-card,
+  .full-clearance-card {
+    grid-template-columns: 1fr;
+  }
+
+  .service-path-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1124,6 +1271,15 @@ h3 {
     aspect-ratio: 3 / 4;
     max-height: 720px;
   }
+
+  .service-path-card {
+    min-height: 0;
+  }
+
+  .service-path-card img {
+    aspect-ratio: 16 / 10;
+    height: auto;
+  }
 }
 
 @media (max-width: 680px) {
@@ -1140,7 +1296,8 @@ h3 {
 
   .nav-links {
     width: 100%;
-    justify-content: space-between;
+    justify-content: flex-start;
+    flex-wrap: wrap;
     gap: 10px;
     font-size: 13px;
   }
@@ -1176,8 +1333,19 @@ h3 {
   .reviews-grid,
   .form-grid,
   .area-pills,
-  .areas-grid {
+  .areas-grid,
+  .service-path-grid {
     grid-template-columns: 1fr;
+  }
+
+  .service-path-card img,
+  .clearance-intro img {
+    aspect-ratio: 4 / 3;
+  }
+
+  .price-table-wrap {
+    margin-right: -16px;
+    border-radius: 8px 0 0 8px;
   }
 
   .section {
@@ -1248,6 +1416,26 @@ h3 {
 
 .button.secondary {
   background: rgba(18, 53, 30, 0.76);
+}
+
+.hero-actions .button.primary {
+  color: #0f2117;
+  background: #f0cf68;
+  border-color: rgba(240, 207, 104, 0.95);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
+}
+
+.hero-actions .button.secondary {
+  color: #f8f5ea;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(240, 207, 104, 0.55);
+}
+
+.hero-actions .button.dark {
+  color: #f8f5ea;
+  background: #1f7a42;
+  border-color: rgba(120, 196, 135, 0.48);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.16);
 }
 
 .button:hover {
