@@ -73,16 +73,16 @@ a {
   display: grid;
   place-items: center;
   width: 92px;
-  height: 56px;
-  border: 1px solid rgba(255, 255, 255, 0.52);
-  border-radius: 10px;
-  background: rgba(251, 250, 246, 0.94);
+  height: 62px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
   overflow: hidden;
 }
 
 .brand-logo {
-  width: 84px;
-  height: 48px;
+  width: 92px;
+  height: 62px;
   object-fit: contain;
   object-position: center;
 }
@@ -718,6 +718,111 @@ h3 {
   font-size: clamp(16px, 1.7vw, 19px);
 }
 
+.garden-service-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+  margin-bottom: 28px;
+}
+
+.garden-price-option {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+  box-shadow: 0 18px 48px rgba(18, 53, 30, 0.1);
+}
+
+.garden-option-heading {
+  min-height: 188px;
+  padding: clamp(22px, 3vw, 30px);
+  background: linear-gradient(135deg, #f7f8f1, #edf2e5);
+}
+
+.clearance-option .garden-option-heading {
+  background: linear-gradient(135deg, #f3f1e8, #e7ecdd);
+}
+
+.garden-option-heading h3 {
+  font-size: clamp(28px, 3.5vw, 40px);
+}
+
+.garden-option-heading p:last-child {
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
+.garden-option-rate {
+  padding: 22px clamp(22px, 3vw, 30px);
+  background: var(--leaf-deep);
+  color: var(--white);
+}
+
+.garden-option-rate span {
+  display: block;
+  color: var(--sun);
+  font-size: 13px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.garden-option-rate strong {
+  display: block;
+  margin-top: 6px;
+  font-size: clamp(38px, 5vw, 58px);
+  line-height: 1;
+}
+
+.garden-option-rate small {
+  font-family: inherit;
+  font-size: 0.42em;
+  font-weight: 800;
+}
+
+.garden-option-rate p {
+  margin: 10px 0 0;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.garden-option-list {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 14px clamp(22px, 3vw, 30px) 8px;
+  list-style: none;
+}
+
+.garden-option-list li {
+  position: relative;
+  padding: 13px 0 13px 30px;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+}
+
+.garden-option-list li:last-child {
+  border-bottom: 0;
+}
+
+.garden-option-list li::before {
+  content: "";
+  position: absolute;
+  top: 18px;
+  left: 3px;
+  width: 8px;
+  height: 14px;
+  border: solid #18a337;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.garden-price-option .button {
+  align-self: flex-start;
+  margin: auto 0 26px clamp(22px, 3vw, 30px);
+}
+
 .service-card {
   min-height: 250px;
   padding: 26px;
@@ -818,12 +923,14 @@ h3 {
 }
 
 .service-spotlight img {
-  aspect-ratio: 3 / 4;
+  display: block;
+  width: 100%;
+  aspect-ratio: auto;
   height: auto;
   border-radius: 7px;
-  object-fit: contain;
+  object-fit: cover;
   object-position: center;
-  background: #e7e2d7;
+  background: transparent;
 }
 
 .service-spotlight.clearance-intro img {
@@ -1310,6 +1417,7 @@ h3 {
 
   .compact-grid,
   .four-service-grid,
+  .garden-service-options,
   .rate-banner,
   .green-waste-panel,
   .reviews-heading,
@@ -1352,8 +1460,8 @@ h3 {
   }
 
   .service-spotlight img {
-    aspect-ratio: 3 / 4;
-    max-height: 720px;
+    aspect-ratio: auto;
+    max-height: none;
   }
 
   .service-path-card {
@@ -1401,13 +1509,13 @@ h3 {
   }
 
   .brand-logo-wrap {
-    width: 74px;
-    height: 50px;
+    width: 82px;
+    height: 56px;
   }
 
   .brand-logo {
-    width: 68px;
-    height: 42px;
+    width: 82px;
+    height: 56px;
   }
 
   .hero {
