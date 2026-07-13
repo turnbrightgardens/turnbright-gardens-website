@@ -3,6 +3,7 @@ const projects = document.querySelectorAll(".project-card");
 const featureWork = document.querySelector(".feature-work");
 const limitedTextareas = document.querySelectorAll("textarea[data-word-limit]");
 const slideshows = document.querySelectorAll("[data-gallery-slideshow]");
+const reviewCarousels = document.querySelectorAll("[data-review-carousel]");
 
 toggles.forEach((toggle) => {
   toggle.addEventListener("click", () => {
@@ -100,4 +101,68 @@ slideshows.forEach((slideshow) => {
   });
 
   showSlide(0);
+});
+
+reviewCarousels.forEach((carousel) => {
+  const slides = Array.from(carousel.querySelectorAll(".review-slide"));
+  const dots = Array.from(carousel.querySelectorAll("[data-review-dot]"));
+  const previousButton = carousel.querySelector("[data-review-prev]");
+  const nextButton = carousel.querySelector("[data-review-next]");
+  let currentIndex = 0;
+  let autoplayTimer;
+
+  if (!slides.length) {
+    return;
+  }
+
+  const showReview = (index) => {
+    currentIndex = (index + slides.length) % slides.length;
+
+    slides.forEach((slide, slideIndex) => {
+      slide.classList.toggle("is-active", slideIndex === currentIndex);
+    });
+
+    dots.forEach((dot, dotIndex) => {
+      const isActive = dotIndex === currentIndex;
+      dot.classList.toggle("is-active", isActive);
+      dot.setAttribute("aria-selected", String(isActive));
+    });
+  };
+
+  const restartAutoplay = () => {
+    window.clearInterval(autoplayTimer);
+    autoplayTimer = window.setInterval(() => showReview(currentIndex + 1), 6500);
+  };
+
+  previousButton?.addEventListener("click", () => {
+    showReview(currentIndex - 1);
+    restartAutoplay();
+  });
+
+  nextButton?.addEventListener("click", () => {
+    showReview(currentIndex + 1);
+    restartAutoplay();
+  });
+
+  dots.forEach((dot) => {
+    dot.addEventListener("click", () => {
+      showReview(Number(dot.dataset.reviewDot));
+      restartAutoplay();
+    });
+  });
+
+  carousel.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") {
+      showReview(currentIndex - 1);
+      restartAutoplay();
+    }
+
+    if (event.key === "ArrowRight") {
+      showReview(currentIndex + 1);
+      restartAutoplay();
+    }
+  });
+
+  showReview(0);
+  restartAutoplay();
 });
