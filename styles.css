@@ -72,19 +72,98 @@ a {
 .brand-logo-wrap {
   display: grid;
   place-items: center;
-  width: 92px;
-  height: 62px;
-  border: 0;
-  border-radius: 8px;
-  background: transparent;
+  width: 64px;
+  height: 64px;
+  padding: 5px;
+  border: 1px solid rgba(178, 196, 124, 0.5);
+  border-radius: 50%;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(235, 241, 222, 0.9));
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
   overflow: hidden;
 }
 
 .brand-logo {
-  width: 92px;
-  height: 62px;
+  width: 54px;
+  height: 54px;
   object-fit: contain;
   object-position: center;
+  transform: translateX(-2px);
+}
+
+.legal-hero {
+  min-height: 0;
+  padding-top: clamp(70px, 9vw, 118px);
+  padding-bottom: clamp(54px, 7vw, 88px);
+}
+
+.legal-hero h1 {
+  max-width: 900px;
+  font-size: clamp(42px, 6vw, 72px);
+}
+
+.legal-document {
+  width: min(100% - 40px, 920px);
+  margin: 0 auto;
+  padding: clamp(56px, 7vw, 92px) 0;
+  color: #26342b;
+}
+
+.legal-updated {
+  margin: 0 0 18px;
+  color: var(--forest);
+  font-weight: 900;
+}
+
+.legal-intro {
+  margin: 0 0 48px;
+  padding: 22px 24px;
+  border-left: 4px solid var(--sun);
+  background: rgba(236, 239, 228, 0.72);
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.legal-section {
+  padding: 30px 0;
+  border-top: 1px solid rgba(27, 62, 39, 0.18);
+}
+
+.legal-section h2 {
+  margin: 0 0 14px;
+  color: var(--ink);
+  font-size: clamp(24px, 3vw, 32px);
+}
+
+.legal-section p,
+.legal-section li {
+  font-size: 17px;
+  line-height: 1.75;
+}
+
+.legal-section p {
+  margin: 0 0 12px;
+}
+
+.legal-section ul {
+  margin: 14px 0 0;
+  padding-left: 24px;
+}
+
+.legal-contact {
+  margin-top: 32px;
+  padding: 26px;
+  border: 1px solid rgba(27, 62, 39, 0.2);
+  border-radius: 8px;
+  background: #f2f5eb;
+}
+
+.legal-contact p {
+  margin: 5px 0;
+}
+
+.legal-contact a {
+  color: var(--forest);
+  font-weight: 800;
 }
 
 .header-phone {
@@ -1796,13 +1875,14 @@ h3 {
   }
 
   .brand-logo-wrap {
-    width: 82px;
-    height: 56px;
+    width: 60px;
+    height: 60px;
+    padding: 5px;
   }
 
   .brand-logo {
-    width: 82px;
-    height: 56px;
+    width: 50px;
+    height: 50px;
   }
 
   .hero {
