@@ -518,7 +518,7 @@ h3 {
 
 .page-hero h1 {
   max-width: 980px;
-  font-size: clamp(44px, 7vw, 82px);
+  font-size: clamp(40px, 5.6vw, 68px);
 }
 
 .page-hero p:not(.eyebrow) {
@@ -685,83 +685,55 @@ h3 {
   object-fit: cover;
 }
 
-.price-guide-section {
+.clearance-work-section {
   padding-top: 0;
 }
 
-.price-table-wrap {
-  overflow-x: auto;
+.clearance-work-intro {
+  max-width: 720px;
+  margin: 12px 0 0;
+  color: var(--muted);
+}
+
+.clearance-work-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) repeat(2, minmax(0, 0.85fr));
+  grid-template-rows: repeat(2, minmax(240px, 300px));
+  gap: 14px;
+  margin-top: 30px;
+}
+
+.clearance-work-card {
+  position: relative;
+  overflow: hidden;
+  min-width: 0;
+  margin: 0;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: var(--white);
-  box-shadow: 0 18px 48px rgba(18, 53, 30, 0.1);
+  background: #dfe6dc;
+  box-shadow: 0 14px 34px rgba(14, 26, 18, 0.1);
 }
 
-.clearance-price-table {
+.clearance-work-feature {
+  grid-row: 1 / span 2;
+}
+
+.clearance-work-card img {
   width: 100%;
-  min-width: 860px;
-  border-collapse: collapse;
-  background: var(--white);
+  height: 100%;
+  object-fit: cover;
 }
 
-.clearance-price-table th {
-  padding: 16px 18px;
+.clearance-work-card figcaption {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 12px 15px;
   color: var(--white);
-  background: var(--leaf);
-  font-size: 14px;
-  text-align: left;
-  text-transform: uppercase;
-}
-
-.clearance-price-table th:not(:first-child),
-.clearance-price-table td:not(:first-child) {
-  text-align: center;
-}
-
-.clearance-price-table td {
-  padding: 14px 18px;
-  border-top: 1px solid rgba(23, 32, 26, 0.1);
-  color: var(--ink);
-  font-size: 16px;
-}
-
-.clearance-price-table td:not(:first-child) {
-  color: var(--leaf-deep);
-  font-size: 19px;
-  font-weight: 900;
-}
-
-.full-clearance-card {
-  display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
-  gap: 28px;
-  align-items: center;
-  margin-top: 22px;
-  padding: clamp(22px, 4vw, 34px);
-  border-radius: 8px;
-  background: linear-gradient(135deg, var(--leaf-deep), #244e2d);
-  color: var(--white);
-  box-shadow: var(--shadow);
-}
-
-.full-clearance-card .eyebrow {
-  color: var(--sun);
-}
-
-.full-clearance-card h3 {
-  font-size: clamp(34px, 5vw, 58px);
-}
-
-.full-clearance-card p,
-.full-clearance-card li {
-  color: rgba(255, 255, 255, 0.86);
-}
-
-.price-disclaimer {
-  max-width: 900px;
-  margin: 20px 0 0;
-  color: var(--muted);
+  background: rgba(14, 26, 18, 0.9);
   font-size: 15px;
+  font-weight: 900;
 }
 
 .compact-grid {
@@ -1052,6 +1024,18 @@ h3 {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--white);
+  box-shadow: 0 14px 38px rgba(18, 53, 30, 0.08);
+}
+
+.green-waste-image-panel {
+  margin-top: 24px;
+}
+
+.green-waste-price-image {
+  width: min(720px, 100%);
+  height: auto;
+  margin: 0 auto;
+  border-radius: 8px;
   box-shadow: 0 14px 38px rgba(18, 53, 30, 0.08);
 }
 
@@ -1593,6 +1577,76 @@ h3 {
   line-height: 1.42;
 }
 
+.clearance-reviews-section {
+  padding-top: 64px;
+  padding-bottom: 72px;
+}
+
+.clearance-reviews-summary {
+  margin: 0;
+  color: var(--muted);
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.clearance-review-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 28px;
+}
+
+.clearance-review-card {
+  min-height: 250px;
+  padding: clamp(22px, 3vw, 30px);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--leaf);
+  border-radius: 8px;
+  background: var(--white);
+  box-shadow: 0 14px 34px rgba(14, 26, 18, 0.08);
+}
+
+.clearance-review-topline {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 12px;
+  align-items: center;
+}
+
+.clearance-review-avatar {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  color: var(--white);
+  background: var(--leaf);
+  font-size: 17px;
+  font-weight: 900;
+}
+
+.clearance-review-card h3 {
+  font-size: 18px;
+}
+
+.clearance-review-card p {
+  margin: 3px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.clearance-review-card .review-stars {
+  margin-top: 20px;
+}
+
+.clearance-review-card blockquote {
+  margin: 14px 0 0;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: clamp(19px, 2vw, 24px);
+  line-height: 1.35;
+}
+
 .review-carousel {
   width: min(980px, 100%);
   margin: 0 auto;
@@ -1754,9 +1808,17 @@ h3 {
   .feature-work,
   .service-spotlight,
   .proof-section,
-  .service-path-card,
-  .full-clearance-card {
+  .service-path-card {
     grid-template-columns: 1fr;
+  }
+
+  .clearance-work-grid {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    grid-template-rows: repeat(3, 220px);
+  }
+
+  .clearance-work-feature {
+    grid-row: 1 / span 2;
   }
 
   .service-path-grid {
@@ -1788,6 +1850,10 @@ h3 {
 
   .reviews-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .clearance-review-grid {
+    grid-template-columns: 1fr;
   }
 
   .review-slide {
@@ -1973,9 +2039,19 @@ h3 {
     order: -1;
   }
 
-  .price-table-wrap {
-    margin-right: -16px;
-    border-radius: 8px 0 0 8px;
+  .clearance-work-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: 300px repeat(2, 210px);
+  }
+
+  .clearance-work-feature {
+    grid-column: 1 / -1;
+    grid-row: auto;
+  }
+
+  .clearance-work-card figcaption {
+    padding: 10px 12px;
+    font-size: 13px;
   }
 
   .section {
