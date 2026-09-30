@@ -744,6 +744,48 @@ h3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.landscaping-service-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.project-showcase-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(290px, 0.75fr);
+  gap: 2rem;
+  align-items: center;
+  padding: 1.25rem;
+  border: 1px solid rgba(31, 66, 47, 0.14);
+  border-radius: 28px;
+  background: #f8f4e9;
+  box-shadow: 0 24px 60px rgba(20, 48, 34, 0.1);
+}
+
+.project-showcase-card > img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 20px;
+}
+
+.project-showcase-copy {
+  padding: 0.5rem 0.75rem 0.5rem 0;
+}
+
+.project-showcase-copy h3 {
+  margin-top: 0;
+}
+
+.gardening-work-example {
+  margin-top: 2rem;
+}
+
+.gardening-work-example img {
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+  background: #f8f4e9;
+}
+
 .four-service-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
@@ -1808,6 +1850,7 @@ h3 {
   .feature-work,
   .service-spotlight,
   .proof-section,
+  .project-showcase-card,
   .service-path-card {
     grid-template-columns: 1fr;
   }
@@ -1885,6 +1928,10 @@ h3 {
   .service-spotlight img {
     aspect-ratio: auto;
     max-height: none;
+  }
+
+  .project-showcase-copy {
+    padding: 0.25rem;
   }
 
   .service-path-card {
