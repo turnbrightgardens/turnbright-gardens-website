@@ -2,6 +2,8 @@
 /services.html /gardening 301!
 /landscaping /landscaping.html 200
 /house-clearance /house-clearance.html 200
+/house-clearance-barnet /house-clearance-barnet.html 200
+/house-clearance-enfield /house-clearance-enfield.html 200
 /terms /terms.html 200
 http://turnbright.co.uk/* https://turnbright.co.uk/:splat 301!
 http://www.turnbright.co.uk/* https://turnbright.co.uk/:splat 301!
