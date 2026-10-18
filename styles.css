@@ -2435,3 +2435,57 @@ h3 {
   color: var(--leaf);
   font-weight: 800;
 }
+
+/* Contact form: optional photo upload */
+.photo-upload {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.photo-upload legend {
+  margin-bottom: 8px;
+  padding: 0;
+  color: var(--leaf-deep);
+  font-weight: 800;
+}
+
+.photo-upload-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.contact-form .photo-upload-grid label {
+  font-size: 14px;
+}
+
+.contact-form input[type="file"] {
+  padding: 10px;
+  font-size: 14px;
+}
+
+.photo-upload .form-hint {
+  margin: 0;
+}
+
+.photo-upload .form-hint a {
+  color: var(--leaf);
+  font-weight: 800;
+}
+
+.form-error {
+  margin: 0;
+  color: #a12a1f;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+@media (max-width: 680px) {
+  .photo-upload-grid {
+    grid-template-columns: 1fr;
+  }
+}
