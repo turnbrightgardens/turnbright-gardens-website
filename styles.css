@@ -1081,6 +1081,12 @@ h3 {
   box-shadow: 0 14px 38px rgba(18, 53, 30, 0.08);
 }
 
+.green-waste-image-panel .waste-prices,
+.green-waste-image-panel p {
+  width: min(720px, 100%);
+  margin: 16px auto 0;
+}
+
 .green-waste-panel h3 {
   font-size: clamp(26px, 3.2vw, 38px);
 }
