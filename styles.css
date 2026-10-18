@@ -2430,7 +2430,8 @@ h3 {
   color: var(--muted);
 }
 
-.clearance-faq a {
+.clearance-faq a,
+.clearance-steps a {
   color: var(--leaf);
   font-weight: 800;
 }
