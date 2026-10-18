@@ -2435,3 +2435,10 @@ h3 {
   color: var(--leaf);
   font-weight: 800;
 }
+
+/* Home hero: descriptive H1 sized like the other page heroes */
+.hero #hero-title {
+  max-width: 21ch;
+  font-size: clamp(40px, 5.6vw, 68px);
+  line-height: 1;
+}
