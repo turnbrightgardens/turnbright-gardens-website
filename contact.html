@@ -177,7 +177,7 @@
         <div class="contact-card contact-form-card">
           <p class="eyebrow">Quick contact form</p>
           <h2>Send us a message</h2>
-          <form class="contact-form" name="contact" method="POST" action="/thank-you.html" enctype="multipart/form-data" data-netlify="true" netlify-honeypot="bot-field" data-photo-form>
+          <form class="contact-form" name="contact" method="POST" action="/thank-you.html" data-netlify="true" netlify-honeypot="bot-field">
             <input type="hidden" name="form-name" value="contact" />
             <p class="hidden-field">
               <label>Do not fill this in <input name="bot-field" /></label>
@@ -223,28 +223,6 @@
               ></textarea>
             </label>
             <p id="message-limit" class="form-hint">Maximum 200 words.</p>
-            <fieldset class="photo-upload" aria-describedby="photo-hint">
-              <legend>Upload photos (optional)</legend>
-              <div class="photo-upload-grid">
-                <label>
-                  Photo 1
-                  <input type="file" name="attachment" accept="image/*" data-photo-input />
-                </label>
-                <label>
-                  Photo 2
-                  <input type="file" name="attachment-2" accept="image/*" data-photo-input />
-                </label>
-                <label>
-                  Photo 3
-                  <input type="file" name="attachment-3" accept="image/*" data-photo-input />
-                </label>
-              </div>
-              <p id="photo-hint" class="form-hint">
-                Up to 3 photos, one in each box, 8 MB in total. Large photos are made smaller automatically before sending.
-                Prefer WhatsApp? <a href="https://wa.me/447877056734" target="_blank" rel="noopener">Send your photos on WhatsApp</a> instead.
-              </p>
-              <p class="form-error" role="alert" data-photo-error hidden></p>
-            </fieldset>
             <button class="button primary" type="submit">Send message</button>
           </form>
         </div>
