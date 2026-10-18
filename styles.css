@@ -83,10 +83,10 @@ a {
   width: 64px;
   height: 64px;
   padding: 5px;
-  border: 1px solid rgba(149, 159, 171, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.7);
   border-radius: 50%;
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(230, 232, 233, 0.9));
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+  background: #fbfaf6;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1), 0 8px 22px rgba(0, 0, 0, 0.28);
   overflow: hidden;
 }
 
