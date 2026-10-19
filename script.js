@@ -166,3 +166,38 @@ reviewCarousels.forEach((carousel) => {
   showReview(0);
   restartAutoplay();
 });
+
+const navDropdowns = document.querySelectorAll(".nav-dropdown");
+
+const closeNavDropdown = (dropdown) => {
+  dropdown.classList.remove("is-open");
+  dropdown.querySelector(".nav-dropdown-toggle")?.setAttribute("aria-expanded", "false");
+};
+
+navDropdowns.forEach((dropdown) => {
+  const toggle = dropdown.querySelector(".nav-dropdown-toggle");
+
+  toggle?.addEventListener("click", (event) => {
+    event.stopPropagation();
+    const isOpen = dropdown.classList.toggle("is-open");
+    toggle.setAttribute("aria-expanded", String(isOpen));
+    if (!isOpen) {
+      toggle.blur();
+    }
+  });
+
+  dropdown.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeNavDropdown(dropdown);
+      toggle?.focus();
+    }
+  });
+});
+
+document.addEventListener("click", (event) => {
+  navDropdowns.forEach((dropdown) => {
+    if (!dropdown.contains(event.target)) {
+      closeNavDropdown(dropdown);
+    }
+  });
+});
