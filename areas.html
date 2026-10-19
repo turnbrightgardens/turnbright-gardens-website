@@ -41,7 +41,7 @@
         "telephone": "+442080641412",
         "email": "team@turnbright.co.uk",
         "priceRange": "££",
-        "description": "TurnBright Gardens provides residential and commercial gardening, pressure washing, house clearance and furniture removal across Greater London and surrounding counties including Hertfordshire, Bedfordshire, Buckinghamshire, Berkshire and Essex border areas.",
+        "description": "TurnBright provides residential and commercial gardening, pressure washing, house clearance and furniture removal across Greater London and surrounding counties including Hertfordshire, Bedfordshire, Buckinghamshire, Berkshire and Essex border areas.",
         "areaServed": [
           { "@type": "Place", "name": "Greater London, UK" },
           { "@type": "Place", "name": "Barnet, UK" },
@@ -116,7 +116,16 @@
         <a href="index.html">Home</a>
         <a href="gardening.html">Gardening</a>
         <a href="landscaping.html">Landscaping</a>
-        <a href="/house-clearance">House Clearance</a>
+        <div class="nav-dropdown">
+          <a class="nav-dropdown-link" href="/house-clearance">House Clearance</a>
+          <button class="nav-dropdown-toggle" type="button" aria-expanded="false" aria-controls="nav-clearance-menu" aria-label="Show house clearance and waste removal pages"><span aria-hidden="true"></span></button>
+          <div class="nav-dropdown-menu" id="nav-clearance-menu">
+            <a href="/house-clearance">House Clearance (North London)</a>
+            <a href="/house-clearance-barnet">House Clearance Barnet</a>
+            <a href="/house-clearance-enfield">House Clearance Enfield</a>
+            <a href="/rubbish-removal">Rubbish &amp; Waste Removal</a>
+          </div>
+        </div>
         <a class="active" href="areas.html">Areas</a>
         <a href="gallery.html">Gallery/Work</a>
         <a class="contact-nav-link" href="contact.html">Contact Us</a>
@@ -417,6 +426,7 @@
         <a href="gardening.html">Gardening</a>
         <a href="landscaping.html">Landscaping</a>
         <a href="/house-clearance">House Clearance</a>
+        <a href="/rubbish-removal">Rubbish Removal</a>
         <a href="areas.html">Areas We Cover</a>
         <a href="contact.html">Contact</a>
         <a href="terms.html">Terms &amp; Conditions</a>

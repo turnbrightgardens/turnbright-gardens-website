@@ -2461,3 +2461,249 @@ h3 {
   text-decoration: underline;
   text-underline-offset: 3px;
 }
+
+/* Nav dropdown: house clearance and waste pages */
+.nav-dropdown {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.nav-dropdown-toggle {
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  color: inherit;
+  background: transparent;
+  cursor: pointer;
+}
+
+.nav-dropdown-toggle span {
+  width: 7px;
+  height: 7px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform 180ms ease;
+}
+
+.nav-dropdown-toggle:hover,
+.nav-dropdown-toggle:focus-visible {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.nav-dropdown-toggle:focus-visible {
+  outline: 2px solid var(--sun);
+  outline-offset: 1px;
+}
+
+.nav-dropdown-menu {
+  position: absolute;
+  z-index: 30;
+  top: calc(100% + 10px);
+  left: -14px;
+  display: none;
+  min-width: 250px;
+  padding: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 3px solid var(--sun);
+  border-radius: 8px;
+  background: rgba(18, 20, 22, 0.98);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+}
+
+/* Invisible bridge so the menu stays open while the pointer moves down to it */
+.nav-dropdown-menu::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -14px;
+  height: 14px;
+}
+
+.nav-links .nav-dropdown-menu a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.92);
+  white-space: nowrap;
+}
+
+.nav-links .nav-dropdown-menu a::after {
+  display: none;
+}
+
+.nav-links .nav-dropdown-menu a:hover,
+.nav-links .nav-dropdown-menu a:focus-visible,
+.nav-links .nav-dropdown-menu a.active {
+  color: var(--white);
+  background: rgba(45, 212, 191, 0.14);
+}
+
+.nav-links .nav-dropdown-menu a.active {
+  box-shadow: inset 3px 0 0 var(--sun);
+}
+
+.nav-dropdown.is-open .nav-dropdown-menu,
+.nav-dropdown:focus-within .nav-dropdown-menu {
+  display: block;
+}
+
+.nav-dropdown.is-open .nav-dropdown-toggle span {
+  transform: translateY(2px) rotate(-135deg);
+}
+
+@media (hover: hover) and (min-width: 681px) {
+  .nav-dropdown:hover .nav-dropdown-menu {
+    display: block;
+  }
+
+  .nav-dropdown:hover .nav-dropdown-toggle span {
+    transform: translateY(2px) rotate(-135deg);
+  }
+}
+
+@media (max-width: 680px) {
+  .nav-dropdown {
+    flex-wrap: wrap;
+  }
+
+  .nav-dropdown-toggle {
+    width: 30px;
+    height: 30px;
+    margin: -6px 0 -2px;
+    border: 1px solid rgba(255, 255, 255, 0.24);
+  }
+
+  .nav-dropdown.is-open {
+    flex-basis: 100%;
+  }
+
+  .nav-dropdown:focus-within:not(.is-open) .nav-dropdown-menu {
+    display: none;
+  }
+
+  .nav-dropdown-menu {
+    position: static;
+    flex-basis: 100%;
+    min-width: 0;
+    margin-top: 10px;
+    box-shadow: none;
+  }
+
+  .nav-dropdown-menu::before {
+    display: none;
+  }
+
+  .nav-links .nav-dropdown-menu a {
+    padding: 12px;
+    font-size: 15px;
+    white-space: normal;
+  }
+}
+
+/* Rubbish removal page */
+.rubbish-hero {
+  background:
+    linear-gradient(120deg, rgba(20, 22, 25, 0.94) 0%, rgba(26, 31, 36, 0.86) 55%, rgba(15, 118, 110, 0.55) 100%),
+    url("assets/house-clearance-work-truck.jpg") center / cover no-repeat;
+}
+
+.rubbish-contact-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+  margin-top: 18px;
+  font-size: 15px;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.rubbish-contact-strip a {
+  color: var(--sun);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.rubbish-mobile-number {
+  display: block;
+  margin: 18px 0 0;
+  color: var(--sun);
+  font-size: clamp(30px, 4.4vw, 46px);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 0.01em;
+}
+
+.rubbish-mobile-number small {
+  display: block;
+  margin-bottom: 6px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.rubbish-prices {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.rubbish-prices li {
+  padding: clamp(20px, 3vw, 26px);
+  border-radius: 8px;
+  background: var(--leaf-deep);
+  color: var(--white);
+  box-shadow: 0 14px 34px rgba(30, 35, 41, 0.15);
+}
+
+.rubbish-prices span {
+  display: block;
+  color: var(--sun);
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.rubbish-prices strong {
+  display: block;
+  margin-top: 8px;
+  font-size: clamp(26px, 3.4vw, 36px);
+  line-height: 1;
+}
+
+.rubbish-prices p {
+  margin: 10px 0 0;
+  color: rgba(255, 255, 255, 0.84);
+}
+
+.rubbish-section-note {
+  margin: 18px 0 0;
+  color: var(--muted);
+}
+
+.rubbish-section-note a,
+.rubbish-links a {
+  color: var(--leaf);
+  font-weight: 800;
+}
+
+.clearance-cta .rubbish-mobile-number {
+  margin: 4px auto 22px;
+}
+
+.clearance-cta .contact-note a {
+  color: var(--sun);
+  font-weight: 800;
+}
