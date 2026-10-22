@@ -2707,3 +2707,65 @@ h3 {
   color: var(--sun);
   font-weight: 800;
 }
+
+/* ---- Gallery redesign: before/after sliders, bento grid, lightbox ---- */
+.section-sub { margin: 8px 0 0; color: var(--muted); }
+.ba-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 28px; }
+.ba-card { margin: 0; }
+.ba-card figcaption, .bento-item figcaption { margin-top: 10px; font-weight: 700; color: var(--ink); }
+.ba-slider { position: relative; aspect-ratio: 2 / 1; overflow: hidden; border-radius: 14px; background: var(--forest); box-shadow: var(--shadow); user-select: none; }
+.ba-slider img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.ba-before { position: absolute; inset: 0; clip-path: inset(0 calc(100% - var(--pos)) 0 0); }
+.ba-handle { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 3px; margin-left: -1.5px; background: #fff; pointer-events: none; }
+.ba-handle::after { content: "\2194"; position: absolute; top: 50%; left: 50%; width: 44px; height: 44px; transform: translate(-50%, -50%); display: grid; place-items: center; border-radius: 50%; background: var(--leaf); color: #fff; font-size: 22px; box-shadow: 0 4px 14px rgba(0,0,0,.35); }
+.ba-range { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; z-index: 3; }
+.ba-range:focus-visible ~ .ba-handle::after { outline: 3px solid var(--sun); outline-offset: 2px; }
+.ba-label { position: absolute; top: 12px; z-index: 2; padding: 4px 10px; border-radius: 999px; background: rgba(21,25,30,.75); color: #fff; font-size: 13px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; pointer-events: none; }
+.ba-label-before { left: 12px; }
+.ba-label-after { right: 12px; background: var(--leaf); }
+
+.bento-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: 220px; grid-auto-flow: dense; gap: 16px; margin-top: 28px; }
+.bento-item { position: relative; margin: 0; overflow: hidden; border-radius: 14px; background: var(--forest); }
+.bento-item.tall { grid-row: span 2; }
+.bento-item.wide { grid-column: span 2; }
+.bento-item.is-hidden { display: none; }
+.bento-open { display: block; width: 100%; height: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
+.bento-open picture, .bento-open img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+.bento-item:hover img, .bento-open:focus-visible img { transform: scale(1.05); }
+.bento-open:focus-visible { outline: 3px solid var(--sun); outline-offset: -3px; }
+.bento-item figcaption { position: absolute; left: 0; right: 0; bottom: 0; margin: 0; padding: 28px 14px 12px; background: linear-gradient(transparent, rgba(21,25,30,.88)); color: #fff; font-size: 15px; pointer-events: none; }
+
+.lightbox { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 24px; background: rgba(21,25,30,.94); }
+.lightbox[hidden] { display: none; }
+.lightbox figure { margin: 0; max-width: min(1100px, 100%); text-align: center; }
+.lightbox img { max-width: 100%; max-height: 80vh; border-radius: 10px; }
+.lightbox figcaption { margin-top: 12px; color: #fff; font-weight: 700; }
+.lightbox-close, .lightbox-nav { position: absolute; border: 0; border-radius: 50%; width: 48px; height: 48px; background: var(--leaf); color: #fff; font-size: 30px; line-height: 1; cursor: pointer; }
+.lightbox-close { top: 16px; right: 16px; }
+.lightbox-nav { top: 50%; transform: translateY(-50%); }
+.lightbox-nav.prev { left: 16px; }
+.lightbox-nav.next { right: 16px; }
+body.lightbox-open { overflow: hidden; }
+
+/* Areas page groups */
+.areas-groups { display: grid; gap: 28px; }
+.areas-group h3 { margin: 0; }
+.areas-group .area-pills { margin-top: 12px; }
+
+/* FAQ page */
+.faq-page-list { max-width: 860px; }
+
+@media (max-width: 980px) {
+  .bento-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 200px; }
+}
+@media (max-width: 680px) {
+  .ba-grid { grid-template-columns: 1fr; }
+  .bento-grid { grid-auto-rows: 160px; gap: 10px; }
+  .bento-item.wide { grid-column: span 2; }
+  .bento-item figcaption { font-size: 13px; padding: 22px 10px 8px; }
+  .lightbox-nav { top: auto; bottom: 16px; transform: none; }
+}
+@media (max-width: 680px) {
+  .areas-group .area-pills, .clearance-areas-section .area-pills { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .areas-group .area-pills span, .clearance-areas-section .area-pills span { min-height: 40px; padding: 8px 6px; font-size: 14px; text-align: center; }
+}
