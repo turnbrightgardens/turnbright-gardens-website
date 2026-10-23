@@ -202,14 +202,6 @@ document.addEventListener("click", (event) => {
   });
 });
 
-// Before/after drag sliders
-document.querySelectorAll("[data-ba]").forEach((slider) => {
-  const range = slider.querySelector(".ba-range");
-  const update = () => slider.style.setProperty("--pos", `${range.value}%`);
-  range.addEventListener("input", update);
-  update();
-});
-
 // Gallery lightbox
 const lightbox = document.querySelector("[data-lightbox-modal]");
 if (lightbox) {
