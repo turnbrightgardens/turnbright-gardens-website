@@ -1,5 +1,5 @@
 const toggles = document.querySelectorAll(".toggle");
-const projects = document.querySelectorAll(".project-card");
+const projects = document.querySelectorAll(".project-card, .bento-item");
 const featureWork = document.querySelector(".feature-work");
 const limitedTextareas = document.querySelectorAll("textarea[data-word-limit]");
 const slideshows = document.querySelectorAll("[data-gallery-slideshow]");
@@ -201,3 +201,52 @@ document.addEventListener("click", (event) => {
     }
   });
 });
+
+// Gallery lightbox
+const lightbox = document.querySelector("[data-lightbox-modal]");
+if (lightbox) {
+  const lbImg = lightbox.querySelector("[data-lightbox-img]");
+  const lbCap = lightbox.querySelector("[data-lightbox-cap]");
+  let lbItems = [];
+  let lbIndex = 0;
+  let lastFocus = null;
+
+  const show = (i) => {
+    lbIndex = (i + lbItems.length) % lbItems.length;
+    const item = lbItems[lbIndex];
+    lbImg.src = item.dataset.lightbox;
+    lbImg.alt = item.querySelector("img").alt;
+    lbCap.textContent = item.dataset.caption;
+  };
+  const close = () => {
+    lightbox.hidden = true;
+    document.body.classList.remove("lightbox-open");
+    if (lastFocus) lastFocus.focus();
+  };
+
+  document.querySelectorAll("[data-lightbox]").forEach((button) => {
+    button.addEventListener("click", () => {
+      lbItems = Array.from(document.querySelectorAll("[data-lightbox]")).filter(
+        (b) => !b.closest(".is-hidden")
+      );
+      lastFocus = button;
+      show(lbItems.indexOf(button));
+      lightbox.hidden = false;
+      document.body.classList.add("lightbox-open");
+      lightbox.querySelector("[data-lightbox-close]").focus();
+    });
+  });
+
+  lightbox.querySelector("[data-lightbox-close]").addEventListener("click", close);
+  lightbox.querySelector("[data-lightbox-prev]").addEventListener("click", () => show(lbIndex - 1));
+  lightbox.querySelector("[data-lightbox-next]").addEventListener("click", () => show(lbIndex + 1));
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) close();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (lightbox.hidden) return;
+    if (e.key === "Escape") close();
+    if (e.key === "ArrowLeft") show(lbIndex - 1);
+    if (e.key === "ArrowRight") show(lbIndex + 1);
+  });
+}

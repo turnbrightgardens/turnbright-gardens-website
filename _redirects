@@ -7,6 +7,7 @@
 /house-clearance-enfield /house-clearance-enfield.html 200
 /rubbish-removal /rubbish-removal.html 200
 /terms /terms.html 200
+/faq /faq.html 200
 http://turnbright.co.uk/* https://turnbright.co.uk/:splat 301!
 http://www.turnbright.co.uk/* https://turnbright.co.uk/:splat 301!
 https://www.turnbright.co.uk/* https://turnbright.co.uk/:splat 301!
