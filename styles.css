@@ -2766,3 +2766,83 @@ body.lightbox-open { overflow: hidden; }
   .areas-group .area-pills, .clearance-areas-section .area-pills { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .areas-group .area-pills span, .clearance-areas-section .area-pills span { min-height: 40px; padding: 8px 6px; font-size: 14px; text-align: center; }
 }
+
+/* Home hero: house clearance focus (compact) */
+.hero.hero-focus {
+  min-height: 0;
+  align-items: center;
+  padding-top: clamp(64px, 9vw, 110px);
+  padding-bottom: clamp(48px, 6vw, 80px);
+}
+
+.hero.hero-focus #hero-title {
+  max-width: 18ch;
+  font-size: clamp(34px, 4.4vw, 56px);
+  line-height: 1.05;
+}
+
+.hero.hero-focus .hero-copy {
+  margin-top: 16px;
+  font-size: clamp(17px, 1.6vw, 21px);
+  font-weight: 700;
+  color: var(--moss-light);
+}
+
+.hero.hero-focus .hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  max-width: 640px;
+  margin-top: 26px;
+}
+
+.hero.hero-focus .hero-actions .button {
+  min-height: 60px;
+  padding: 14px 22px;
+  gap: 14px;
+  font-size: clamp(17px, 1.4vw, 19px);
+}
+
+.hero.hero-focus .hero-actions .button .button-icon {
+  width: 26px;
+  height: 26px;
+}
+
+.hero.hero-focus .hero-actions .button.whatsapp {
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--whatsapp) 0%, var(--whatsapp-deep) 100%);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.hero.hero-focus .hero-actions .button.whatsapp .button-icon {
+  color: #ffffff;
+}
+
+.hero-links {
+  margin: 20px 0 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 15px;
+}
+
+.hero-links a {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: underline;
+  text-decoration-color: rgba(45, 212, 191, 0.6);
+  text-underline-offset: 3px;
+}
+
+.hero-links a:hover {
+  color: var(--sun);
+}
+
+@media (max-width: 680px) {
+  .hero.hero-focus {
+    padding: 40px 20px 40px;
+  }
+
+  .hero.hero-focus .hero-actions .button {
+    width: 100%;
+    min-height: 58px;
+    font-size: 18px;
+  }
+}
