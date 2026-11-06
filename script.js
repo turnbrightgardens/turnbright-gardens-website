@@ -250,3 +250,60 @@ if (lightbox) {
     if (e.key === "ArrowRight") show(lbIndex + 1);
   });
 }
+
+
+/* Homepage-only scroll reveals + hero entrance */
+(() => {
+  if (!document.body.classList.contains("page-home")) {
+    return;
+  }
+
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const hero = document.querySelector(".hero.hero-focus");
+
+  if (hero) {
+    if (reduceMotion) {
+      hero.classList.add("is-ready");
+    } else {
+      window.requestAnimationFrame(() => hero.classList.add("is-ready"));
+    }
+  }
+
+  const revealTargets = [
+    ...document.querySelectorAll(
+      ".page-home main > section:not(.hero), .page-home .reviews-section, .page-home .service-path-card, .page-home .service-card, .page-home .proof-image, .page-home .proof-copy"
+    ),
+  ];
+
+  revealTargets.forEach((el, index) => {
+    el.classList.add("reveal");
+    const delay = index % 3;
+    if (delay) {
+      el.classList.add(`reveal-delay-${delay}`);
+    }
+  });
+
+  if (reduceMotion) {
+    revealTargets.forEach((el) => el.classList.add("is-visible"));
+    return;
+  }
+
+  if (!("IntersectionObserver" in window)) {
+    revealTargets.forEach((el) => el.classList.add("is-visible"));
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { root: null, rootMargin: "0px 0px -8% 0px", threshold: 0.12 }
+  );
+
+  revealTargets.forEach((el) => observer.observe(el));
+})();
