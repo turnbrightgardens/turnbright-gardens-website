@@ -505,7 +505,12 @@ document.querySelectorAll(".quote-form").forEach((form) => {
       });
 
       if (!response.ok) throw new Error(`submit failed: ${response.status}`);
-      window.location.href = "/thank-you.html";
+      const type = response.headers.get("content-type") || "";
+      if (type.includes("application/json")) {
+        const payload = await response.json().catch(() => null);
+        if (payload && payload.error) throw new Error("submit failed");
+      }
+      reportQuoteSuccess(form);
     } catch (_) {
       fallbackNative();
     }
@@ -587,3 +592,65 @@ document.querySelectorAll(".quote-form").forEach((form) => {
     load();
   }
 })();
+
+/* Analytics: quote success and contact clicks only. Never send form fields. */
+const reportAnalytics = (eventName, params) => {
+  if (typeof window.gtag !== "function") return;
+  window.gtag("event", eventName, params);
+};
+
+const reportQuoteSuccess = (form) => {
+  const go = () => {
+    window.location.href = "/thank-you.html";
+  };
+  const bot = form.querySelector('[name="bot-field"]');
+  if (bot && String(bot.value || "").trim()) {
+    go();
+    return;
+  }
+  if (typeof window.gtag !== "function") {
+    go();
+    return;
+  }
+  let done = false;
+  const finish = () => {
+    if (done) return;
+    done = true;
+    go();
+  };
+  window.setTimeout(finish, 1000);
+  try {
+    window.gtag("event", "generate_lead", {
+      method: "quote_form",
+      transport_type: "beacon",
+      event_callback: finish,
+    });
+  } catch (_) {
+    finish();
+  }
+};
+
+document.addEventListener("click", (event) => {
+  const target = event.target;
+  if (!(target instanceof Element)) return;
+  const link = target.closest("a[href]");
+  if (!link) return;
+  const href = link.getAttribute("href") || "";
+  let method = "";
+  if (href.startsWith("tel:")) method = "phone";
+  else if (/^https?:\/\/(?:wa\.me|api\.whatsapp\.com)\//i.test(href)) method = "whatsapp";
+  else return;
+
+  let placement = "content";
+  if (link.classList.contains("header-phone")) placement = "header";
+  else if (link.classList.contains("sticky-whatsapp")) placement = "sticky";
+  else if (link.classList.contains("mobile-cta-call") || link.classList.contains("mobile-cta-whatsapp")) {
+    placement = "mobile_bar";
+  }
+
+  reportAnalytics("contact_click", {
+    method,
+    placement,
+    transport_type: "beacon",
+  });
+});
