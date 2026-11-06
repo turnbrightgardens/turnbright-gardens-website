@@ -597,16 +597,6 @@ document.querySelectorAll(".quote-form").forEach((form) => {
 const analyticsChoiceKey = "tb-analytics-choice";
 const analyticsMeasurementId = "G-7GM6LPHPRT";
 let analyticsCollectAllowed = false;
-let notifyLeadSent = null;
-
-const watchLead = (url, body) => {
-  if (!notifyLeadSent) return;
-  const blob = `${url || ""} ${typeof body === "string" ? body : ""}`;
-  if (!blob.includes("generate_lead")) return;
-  const notify = notifyLeadSent;
-  notifyLeadSent = null;
-  notify();
-};
 
 const readAnalyticsChoice = () => {
   try {
@@ -658,21 +648,13 @@ const analyticsRequestBlocked = (value) => {
     window.fetch = function (input, init) {
       const url = typeof input === "string" ? input : input && input.url;
       if (analyticsRequestBlocked(url)) return Promise.resolve(new Response(null, { status: 204 }));
-      const pending = originalFetch.call(this, input, init);
-      const blob = `${url || ""} ${init && typeof init.body === "string" ? init.body : ""}`;
-      if (notifyLeadSent && blob.includes("generate_lead")) {
-        const notify = notifyLeadSent;
-        notifyLeadSent = null;
-        pending.finally(notify);
-      }
-      return pending;
+      return originalFetch.call(this, input, init);
     };
   }
   if (navigator.sendBeacon) {
     const originalBeacon = navigator.sendBeacon.bind(navigator);
     navigator.sendBeacon = (url, data) => {
       if (analyticsRequestBlocked(url)) return true;
-      watchLead(url, data);
       return originalBeacon(url, data);
     };
   }
@@ -686,7 +668,6 @@ const analyticsRequestBlocked = (value) => {
       },
       set(value) {
         if (analyticsRequestBlocked(value)) return;
-        watchLead(value, "");
         descriptor.set.call(this, value);
       },
     });
@@ -750,24 +731,15 @@ const reportQuoteSuccess = (form) => {
     go();
     return;
   }
-  if (!analyticsAllowed() || typeof window.gtag !== "function") {
-    go();
-    return;
-  }
-  let done = false;
-  const finish = () => {
-    if (done) return;
-    done = true;
-    notifyLeadSent = null;
-    go();
-  };
-  notifyLeadSent = finish;
-  window.setTimeout(finish, 8000);
   try {
-    window.gtag("event", "generate_lead", { method: "quote_form" });
-  } catch (_) {
-    finish();
-  }
+    if (analyticsAllowed() && typeof window.gtag === "function") {
+      window.gtag("event", "generate_lead", {
+        method: "quote_form",
+        transport_type: "beacon",
+      });
+    }
+  } catch (_) {}
+  go();
 };
 
 document.addEventListener("click", (event) => {
