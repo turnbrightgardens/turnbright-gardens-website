@@ -3803,9 +3803,10 @@ body:has(.site-header.nav-open) .sticky-whatsapp {
   left: 16px;
   bottom: 16px;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 12px;
-  width: min(560px, calc(100% - 200px));
+  width: min(720px, calc(100% - 200px));
   margin: 0;
   padding: 12px 14px;
   border: 1px solid var(--line);
@@ -3828,13 +3829,15 @@ body:has(.site-header.nav-open) .sticky-whatsapp {
 
 .analytics-choice-actions {
   display: flex;
-  flex: 0 0 auto;
+  flex: 1 1 300px;
+  align-items: stretch;
   gap: 8px;
 }
 
 .analytics-choice-actions button {
   flex: 1 1 0;
-  min-width: 104px;
+  align-self: center;
+  min-width: 148px;
   min-height: 44px;
   padding: 8px 14px;
   border: 2px solid var(--ink);
@@ -3844,7 +3847,8 @@ body:has(.site-header.nav-open) .sticky-whatsapp {
   font: inherit;
   font-size: 15px;
   font-weight: 800;
-  line-height: 1;
+  line-height: 1.2;
+  white-space: nowrap;
   cursor: pointer;
 }
 
@@ -3890,13 +3894,22 @@ body:has(.analytics-choice:not([hidden])) {
     gap: 10px;
   }
 
+  .analytics-choice-actions {
+    flex: 0 0 auto;
+    flex-direction: column;
+    width: 100%;
+  }
+
   .analytics-choice-actions button {
+    flex: 0 0 auto;
+    align-self: stretch;
+    width: 100%;
     min-width: 0;
   }
 
   body:has(.analytics-choice:not([hidden])) {
-    padding-bottom: calc(220px + env(safe-area-inset-bottom));
-    scroll-padding-bottom: calc(220px + env(safe-area-inset-bottom));
+    padding-bottom: calc(280px + env(safe-area-inset-bottom));
+    scroll-padding-bottom: calc(280px + env(safe-area-inset-bottom));
   }
 }
 

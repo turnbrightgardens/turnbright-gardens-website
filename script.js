@@ -772,10 +772,10 @@ document.addEventListener("click", (event) => {
   region.setAttribute("role", "region");
   region.setAttribute("aria-labelledby", "analytics-choice-title");
   region.innerHTML =
-    '<p id="analytics-choice-title">Allow Google Analytics? It sets cookies. The site works either way.</p>' +
+    '<p id="analytics-choice-title">We use optional analytics cookies to understand how visitors use our website. You can accept or reject these cookies.</p>' +
     '<div class="analytics-choice-actions">' +
-    '<button type="button" data-analytics-choice="accepted">Accept</button>' +
-    '<button type="button" data-analytics-choice="rejected">Reject</button>' +
+    '<button type="button" data-analytics-choice="accepted">Accept cookies</button>' +
+    '<button type="button" data-analytics-choice="rejected">Reject cookies</button>' +
     "</div>";
 
   const showChoice = (focusFirst) => {
