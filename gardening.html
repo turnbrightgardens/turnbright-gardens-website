@@ -15,17 +15,17 @@
     <link rel="icon" href="/assets/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" href="/assets/favicon-512.png" />
     <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
-    <title>Gardening London, Herts &amp; Essex | TurnBright</title>
+    <title>Gardening North London | Herts &amp; Essex | TurnBright</title>
     <meta
       name="description"
-      content="Garden maintenance from £120 and garden clearance from £150 in North and Central London, Hertfordshire and Essex. Two gardeners, pressure washing and free quotes."
+      content="Garden maintenance and garden clearance in North London, Hertfordshire and Essex. Lawn care, hedges and free photo quotes from TurnBright."
     />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://turnbright.co.uk/gardening" />
-    <meta property="og:title" content="Gardening London, Herts &amp; Essex | TurnBright" />
+    <meta property="og:title" content="Gardening North London | Herts &amp; Essex | TurnBright" />
     <meta
       property="og:description"
-      content="Garden maintenance, garden clearance and commercial outdoor care across Greater London and nearby counties, including hedge trimming, lawn mowing, turf laying and pressure washing."
+      content="Garden maintenance and garden clearance in North London, Hertfordshire and Essex. Lawn care, hedges and free photo quotes from TurnBright."
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://turnbright.co.uk/gardening" />
@@ -154,23 +154,32 @@
         <span>TurnBright</span>
       </a>
       <a class="header-phone" href="tel:02080641412" aria-label="Call TurnBright on 020 8064 1412"><span aria-hidden="true">☎</span> 020 8064 1412</a>
-      <nav class="nav-links" aria-label="Main navigation">
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+      </button>
+      <nav class="nav-links" id="site-nav" aria-label="Main navigation">
         <a href="index.html">Home</a>
-        <a class="active" href="gardening.html">Gardening</a>
-        <a href="landscaping.html">Landscaping</a>
         <div class="nav-dropdown">
-          <a class="nav-dropdown-link" href="/house-clearance">House Clearance</a>
-          <button class="nav-dropdown-toggle" type="button" aria-expanded="false" aria-controls="nav-clearance-menu" aria-label="Show house clearance and waste removal pages"><span aria-hidden="true"></span></button>
-          <div class="nav-dropdown-menu" id="nav-clearance-menu">
+          <button class="nav-dropdown-toggle active" type="button" aria-expanded="false" aria-controls="nav-services-menu" aria-haspopup="true" aria-label="Services menu">
+            <span class="nav-dropdown-label">Services</span>
+            <span class="nav-dropdown-chevron" aria-hidden="true"></span>
+          </button>
+          <div class="nav-dropdown-menu" id="nav-services-menu" role="menu">
             <a href="/house-clearance">House Clearance (North London)</a>
             <a href="/house-clearance-barnet">House Clearance Barnet</a>
             <a href="/house-clearance-enfield">House Clearance Enfield</a>
             <a href="/rubbish-removal">Rubbish &amp; Waste Removal</a>
+            <span class="nav-dropdown-divider" aria-hidden="true"></span>
+            <a href="/office-clearance">Office Clearance London</a>
+            <a href="gardening.html" class="active">Gardening</a>
+            <a href="landscaping.html">Landscaping</a>
           </div>
         </div>
         <a href="areas.html">Areas</a>
+        <a href="gallery.html">Gallery</a>
         <a href="faq.html">FAQ</a>
-        <a href="gallery.html">Gallery/Work</a>
         <a class="contact-nav-link" href="contact.html">Contact Us</a>
       </nav>
     </header>
@@ -248,7 +257,7 @@
         <p class="service-note">Green waste removal is charged separately unless it is included in your quote.</p>
 
         <div class="green-waste-image-panel">
-          <img
+          <picture><source srcset="assets/green-waste-removal-prices.webp" type="image/webp" /><img
             class="green-waste-price-image"
             src="assets/green-waste-removal-prices.png"
             alt="Optional green waste removal: £15 per 120-litre green sack or £60 per ton or 1000-litre jumbo bag, with bags provided by TurnBright"
@@ -256,7 +265,7 @@
             height="171"
             loading="lazy"
             decoding="async"
-          />
+          /></picture>
           <div class="waste-prices" aria-label="Green waste removal prices">
             <div>
               <span>Green sack (120 litres)</span>
@@ -278,12 +287,12 @@
             </p>
             <a class="button dark" href="contact.html">Get a gardening quote</a>
           </div>
-          <img
+          <picture><source srcset="assets/gardening-lawn-mowing-service.webp" type="image/webp" /><img
             src="assets/gardening-lawn-mowing-service.jpeg"
             alt="TurnBright gardener mowing a lawn"
             width="1067"
             height="1600"
-          />
+           loading="lazy" /></picture>
         </div>
 
         <div class="green-waste-panel commercial-panel">
@@ -317,14 +326,14 @@
             </p>
             <a class="button dark" href="contact.html">Ask about garden clearance</a>
           </div>
-          <img
+          <picture><source srcset="assets/garden-clearance-before-after-september.webp" type="image/webp" /><img
             src="assets/garden-clearance-before-after-september.jpeg"
             alt="Before and after an overgrown garden clearance completed by TurnBright"
             loading="lazy"
             decoding="async"
             width="996"
             height="1600"
-          />
+          /></picture>
         </div>
 
         <div class="green-waste-panel commercial-panel">
@@ -359,12 +368,12 @@
             </div>
             <a class="button dark" href="contact.html">Ask for a quote</a>
           </div>
-          <img
+          <picture><source srcset="assets/employee-pressure-washing.webp" type="image/webp" /><img
             src="assets/employee-pressure-washing.jpeg"
             alt="TurnBright employee pressure washing a patio"
             width="943"
             height="1667"
-          />
+           loading="lazy" /></picture>
         </div>
       </section>
 
@@ -628,6 +637,22 @@
         <a href="https://www.tiktok.com/@turnbrightgardens" target="_blank" rel="noopener">TikTok</a>
       </div>
     </footer>
+    
+    <nav class="mobile-cta-bar" aria-label="Quick contact">
+      <a class="mobile-cta-call" href="tel:02080641412">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2Z"/></svg>
+        <span>Call</span>
+      </a>
+      <a class="mobile-cta-whatsapp" href="https://wa.me/447877056734?text=Hi%2C%20I'd%20like%20to%20get%20a%20quote%20for%20a%20clearance" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 2a9.9 9.9 0 0 0-8.5 15l-1.4 5 5.1-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.6-.3Z"/></svg>
+        <span>WhatsApp</span>
+      </a>
+    </nav>
+
+    <a class="sticky-whatsapp" href="https://wa.me/447877056734?text=Hi%2C%20I%27d%20like%20to%20get%20a%20quote%20for%20a%20clearance" target="_blank" rel="noopener" aria-label="WhatsApp TurnBright for a clearance quote">
+      <svg class="sticky-whatsapp-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a9.9 9.9 0 0 0-8.5 15l-1.4 5 5.1-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.6-.3Z"/></svg>
+      <span class="sticky-whatsapp-label">WhatsApp</span>
+    </a>
     <script src="script.js"></script>
   </body>
 </html>
