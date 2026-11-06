@@ -511,3 +511,79 @@ document.querySelectorAll(".quote-form").forEach((form) => {
     }
   });
 });
+
+/* ===== Areas map (lazy Leaflet + OSM, no API key) ===== */
+(function initAreasMap() {
+  const el = document.querySelector("[data-areas-map]");
+  if (!el) return;
+
+  let started = false;
+
+  const load = () => {
+    if (started) return;
+    started = true;
+
+    const lat = parseFloat(el.getAttribute("data-lat") || "51.6415");
+    const lng = parseFloat(el.getAttribute("data-lng") || "-0.1664");
+    const radiusKm = parseFloat(el.getAttribute("data-radius-km") || "25");
+
+    const startMap = () => {
+      if (!window.L) return;
+      const map = window.L.map(el, {
+        scrollWheelZoom: false,
+        dragging: !window.matchMedia("(max-width: 680px)").matches,
+        attributionControl: true,
+      }).setView([lat, lng], 9);
+
+      window.L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 18,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      }).addTo(map);
+
+      window.L.circle([lat, lng], {
+        radius: radiusKm * 1000,
+        color: "#0f766e",
+        weight: 2,
+        fillColor: "#0f766e",
+        fillOpacity: 0.18,
+      }).addTo(map);
+
+      window.L.circleMarker([lat, lng], {
+        radius: 6,
+        color: "#0f766e",
+        weight: 2,
+        fillColor: "#ffffff",
+        fillOpacity: 1,
+      }).addTo(map);
+
+      setTimeout(() => map.invalidateSize(), 80);
+    };
+
+    if (window.L) {
+      startMap();
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
+    script.integrity = "sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=";
+    script.crossOrigin = "";
+    script.onload = startMap;
+    document.head.appendChild(script);
+  };
+
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          io.disconnect();
+          load();
+        }
+      },
+      { rootMargin: "200px 0px" }
+    );
+    io.observe(el);
+  } else {
+    load();
+  }
+})();

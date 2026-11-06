@@ -276,6 +276,7 @@
             <a href="/rubbish-removal">Rubbish &amp; Waste Removal</a>
             <span class="nav-dropdown-divider" aria-hidden="true"></span>
             <a href="/office-clearance" class="active" aria-current="page">Office Clearance London</a>
+            <a href="/probate-clearance">Probate Clearance</a>
             <a href="gardening.html">Gardening</a>
             <a href="landscaping.html">Landscaping</a>
           </div>
@@ -393,17 +394,24 @@
               <label>Phone
                 <input type="tel" name="phone" autocomplete="tel" required />
               </label>
-              <label>Postcode
+              <label class="quote-span-2">Postcode
                 <input type="text" name="postcode" autocomplete="postal-code" required />
               </label>
               <label>Floor
                 <select name="floor" required>
-                  <option value="">Choose</option>
-                  <option value="Ground">Ground</option>
-                  <option value="1st">1st</option>
-                  <option value="2nd">2nd</option>
-                  <option value="3rd+">3rd+</option>
-                  <option value="Lift available">Lift available</option>
+                  <option value="" disabled selected>Select floor</option>
+                  <option value="Ground floor">Ground floor</option>
+                  <option value="1st floor">1st floor</option>
+                  <option value="2nd floor">2nd floor</option>
+                  <option value="3rd floor or higher">3rd floor or higher</option>
+                </select>
+              </label>
+              <label>Lift?
+                <select name="lift">
+                  <option value="" disabled selected>Select</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                  <option value="Not sure">Not sure</option>
                 </select>
               </label>
             </div>
@@ -504,6 +512,7 @@
         <a href="gardening.html">Gardening</a>
         <a href="landscaping.html">Landscaping</a>
         <a href="/house-clearance">House Clearance</a>
+        <a href="/probate-clearance">Probate Clearance</a>
         <a href="/office-clearance">Office Clearance</a>
         <a href="/rubbish-removal">Rubbish Removal</a>
         <a href="areas.html">Areas We Cover</a>
