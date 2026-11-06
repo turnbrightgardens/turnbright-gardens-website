@@ -64,23 +64,32 @@
         <span>TurnBright</span>
       </a>
       <a class="header-phone" href="tel:02080641412" aria-label="Call TurnBright on 020 8064 1412"><span aria-hidden="true">☎</span> 020 8064 1412</a>
-      <nav class="nav-links" aria-label="Main navigation">
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+      </button>
+      <nav class="nav-links" id="site-nav" aria-label="Main navigation">
         <a href="index.html">Home</a>
-        <a href="gardening.html">Gardening</a>
-        <a href="landscaping.html">Landscaping</a>
         <div class="nav-dropdown">
-          <a class="nav-dropdown-link" href="/house-clearance">House Clearance</a>
-          <button class="nav-dropdown-toggle" type="button" aria-expanded="false" aria-controls="nav-clearance-menu" aria-label="Show house clearance and waste removal pages"><span aria-hidden="true"></span></button>
-          <div class="nav-dropdown-menu" id="nav-clearance-menu">
+          <button class="nav-dropdown-toggle" type="button" aria-expanded="false" aria-controls="nav-services-menu" aria-haspopup="true" aria-label="Services menu">
+            <span class="nav-dropdown-label">Services</span>
+            <span class="nav-dropdown-chevron" aria-hidden="true"></span>
+          </button>
+          <div class="nav-dropdown-menu" id="nav-services-menu" role="menu">
             <a href="/house-clearance">House Clearance (North London)</a>
             <a href="/house-clearance-barnet">House Clearance Barnet</a>
             <a href="/house-clearance-enfield">House Clearance Enfield</a>
             <a href="/rubbish-removal">Rubbish &amp; Waste Removal</a>
+            <span class="nav-dropdown-divider" aria-hidden="true"></span>
+            <a href="/office-clearance">Office Clearance London</a>
+            <a href="gardening.html">Gardening</a>
+            <a href="landscaping.html">Landscaping</a>
           </div>
         </div>
         <a href="areas.html">Areas</a>
+        <a class="active" href="gallery.html">Gallery</a>
         <a href="faq.html">FAQ</a>
-        <a class="active" href="gallery.html">Gallery/Work</a>
         <a class="contact-nav-link" href="contact.html">Contact Us</a>
       </nav>
     </header>
@@ -158,27 +167,27 @@
             <figcaption>Green waste removal</figcaption>
           </figure>
           <figure class="bento-item wide">
-            <button class="bento-open" type="button" data-lightbox="assets/recent-long-garden-before-after.jpeg" data-caption="Lawn cut" aria-label="Enlarge: Lawn cut"><img src="assets/recent-long-garden-before-after.jpeg" alt="Before and after long garden lawn cut" width="1672" height="941" loading="lazy" decoding="async" /></button>
+            <button class="bento-open" type="button" data-lightbox="assets/recent-long-garden-before-after.jpeg" data-caption="Lawn cut" aria-label="Enlarge: Lawn cut"><picture><source srcset="assets/recent-long-garden-before-after.webp" type="image/webp" /><img src="assets/recent-long-garden-before-after.jpeg" alt="Before and after long garden lawn cut" width="1672" height="941" loading="lazy" decoding="async" /></picture></button>
             <figcaption>Lawn cut</figcaption>
           </figure>
           <figure class="bento-item ">
-            <button class="bento-open" type="button" data-lightbox="assets/recent-hedge-before-after.jpeg" data-caption="Hedge trimming" aria-label="Enlarge: Hedge trimming"><img src="assets/recent-hedge-before-after.jpeg" alt="Before and after hedge trimming" width="1601" height="983" loading="lazy" decoding="async" /></button>
+            <button class="bento-open" type="button" data-lightbox="assets/recent-hedge-before-after.jpeg" data-caption="Hedge trimming" aria-label="Enlarge: Hedge trimming"><picture><source srcset="assets/recent-hedge-before-after.webp" type="image/webp" /><img src="assets/recent-hedge-before-after.jpeg" alt="Before and after hedge trimming" width="1601" height="983" loading="lazy" decoding="async" /></picture></button>
             <figcaption>Hedge trimming</figcaption>
           </figure>
           <figure class="bento-item ">
-            <button class="bento-open" type="button" data-lightbox="assets/recent-pathway-before-after-new.jpeg" data-caption="Pathway clearance" aria-label="Enlarge: Pathway clearance"><img src="assets/recent-pathway-before-after-new.jpeg" alt="Before and after garden pathway clearance and hedge trimming" width="1536" height="1024" loading="lazy" decoding="async" /></button>
+            <button class="bento-open" type="button" data-lightbox="assets/recent-pathway-before-after-new.jpeg" data-caption="Pathway clearance" aria-label="Enlarge: Pathway clearance"><picture><source srcset="assets/recent-pathway-before-after-new.webp" type="image/webp" /><img src="assets/recent-pathway-before-after-new.jpeg" alt="Before and after garden pathway clearance and hedge trimming" width="1536" height="1024" loading="lazy" decoding="async" /></picture></button>
             <figcaption>Pathway clearance</figcaption>
           </figure>
           <figure class="bento-item wide">
-            <button class="bento-open" type="button" data-lightbox="assets/recent-patio-clean-before-after.jpeg" data-caption="Patio clean-up" aria-label="Enlarge: Patio clean-up"><img src="assets/recent-patio-clean-before-after.jpeg" alt="Before and after patio clean-up" width="1536" height="1024" loading="lazy" decoding="async" /></button>
+            <button class="bento-open" type="button" data-lightbox="assets/recent-patio-clean-before-after.jpeg" data-caption="Patio clean-up" aria-label="Enlarge: Patio clean-up"><picture><source srcset="assets/recent-patio-clean-before-after.webp" type="image/webp" /><img src="assets/recent-patio-clean-before-after.jpeg" alt="Before and after patio clean-up" width="1536" height="1024" loading="lazy" decoding="async" /></picture></button>
             <figcaption>Patio clean-up</figcaption>
           </figure>
           <figure class="bento-item tall">
-            <button class="bento-open" type="button" data-lightbox="assets/recent-decking-before-after.jpeg" data-caption="Decking refresh" aria-label="Enlarge: Decking refresh"><img src="assets/recent-decking-before-after.jpeg" alt="Before and after decking clean and refresh" width="1086" height="1448" loading="lazy" decoding="async" /></button>
+            <button class="bento-open" type="button" data-lightbox="assets/recent-decking-before-after.jpeg" data-caption="Decking refresh" aria-label="Enlarge: Decking refresh"><picture><source srcset="assets/recent-decking-before-after.webp" type="image/webp" /><img src="assets/recent-decking-before-after.jpeg" alt="Before and after decking clean and refresh" width="1086" height="1448" loading="lazy" decoding="async" /></picture></button>
             <figcaption>Decking refresh</figcaption>
           </figure>
           <figure class="bento-item wide">
-            <button class="bento-open" type="button" data-lightbox="assets/recent-artificial-grass-before-after.jpeg" data-caption="Artificial grass finish" aria-label="Enlarge: Artificial grass finish"><img src="assets/recent-artificial-grass-before-after.jpeg" alt="Before and after artificial grass garden finish" width="1448" height="1086" loading="lazy" decoding="async" /></button>
+            <button class="bento-open" type="button" data-lightbox="assets/recent-artificial-grass-before-after.jpeg" data-caption="Artificial grass finish" aria-label="Enlarge: Artificial grass finish"><picture><source srcset="assets/recent-artificial-grass-before-after.webp" type="image/webp" /><img src="assets/recent-artificial-grass-before-after.jpeg" alt="Before and after artificial grass garden finish" width="1448" height="1086" loading="lazy" decoding="async" /></picture></button>
             <figcaption>Artificial grass finish</figcaption>
           </figure>
         </div>
@@ -187,7 +196,7 @@
       <div class="lightbox" data-lightbox-modal hidden role="dialog" aria-modal="true" aria-label="Photo viewer">
         <button class="lightbox-close" type="button" data-lightbox-close aria-label="Close">&times;</button>
         <button class="lightbox-nav prev" type="button" data-lightbox-prev aria-label="Previous photo">&#8249;</button>
-        <figure><img src="" alt="" data-lightbox-img /><figcaption data-lightbox-cap></figcaption></figure>
+        <figure><img src="" alt="" data-lightbox-img  loading="lazy" /><figcaption data-lightbox-cap></figcaption></figure>
         <button class="lightbox-nav next" type="button" data-lightbox-next aria-label="Next photo">&#8250;</button>
       </div>
       <section class="contact-section clearance-cta" aria-labelledby="gallery-cta-title">
@@ -409,6 +418,22 @@
       </div>
     </footer>
 
+    
+    <nav class="mobile-cta-bar" aria-label="Quick contact">
+      <a class="mobile-cta-call" href="tel:02080641412">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2Z"/></svg>
+        <span>Call</span>
+      </a>
+      <a class="mobile-cta-whatsapp" href="https://wa.me/447877056734?text=Hi%2C%20I'd%20like%20to%20get%20a%20quote%20for%20a%20clearance" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 2a9.9 9.9 0 0 0-8.5 15l-1.4 5 5.1-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.6-.3Z"/></svg>
+        <span>WhatsApp</span>
+      </a>
+    </nav>
+
+    <a class="sticky-whatsapp" href="https://wa.me/447877056734?text=Hi%2C%20I%27d%20like%20to%20get%20a%20quote%20for%20a%20clearance" target="_blank" rel="noopener" aria-label="WhatsApp TurnBright for a clearance quote">
+      <svg class="sticky-whatsapp-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a9.9 9.9 0 0 0-8.5 15l-1.4 5 5.1-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.6-.3Z"/></svg>
+      <span class="sticky-whatsapp-label">WhatsApp</span>
+    </a>
     <script src="script.js"></script>
   </body>
 </html>
