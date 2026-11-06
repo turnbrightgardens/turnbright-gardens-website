@@ -400,9 +400,114 @@ if (lightbox) {
 
 document.querySelectorAll(".quote-form").forEach((form) => {
   const firstPhoto = form.querySelector('input[name="photo-1"]');
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const MAX_EDGE = 1600;
+  const JPEG_QUALITY = 0.72;
+  const MAX_BYTES = 900 * 1024;
+
   firstPhoto?.addEventListener("change", () => {
     if (firstPhoto.files && firstPhoto.files.length) {
       form.classList.add("has-photos");
+    }
+  });
+
+  const loadImage = (file) =>
+    new Promise((resolve, reject) => {
+      const url = URL.createObjectURL(file);
+      const img = new Image();
+      img.onload = () => {
+        URL.revokeObjectURL(url);
+        resolve(img);
+      };
+      img.onerror = () => {
+        URL.revokeObjectURL(url);
+        reject(new Error("image load failed"));
+      };
+      img.src = url;
+    });
+
+  const canvasToBlob = (canvas, quality) =>
+    new Promise((resolve) => {
+      canvas.toBlob((blob) => resolve(blob), "image/jpeg", quality);
+    });
+
+  const compressFile = async (file) => {
+    if (!file || !file.type.startsWith("image/")) return file;
+    if (file.size <= MAX_BYTES && file.type === "image/jpeg") return file;
+    try {
+      const img = await loadImage(file);
+      let { width, height } = img;
+      const scale = Math.min(1, MAX_EDGE / Math.max(width, height));
+      width = Math.max(1, Math.round(width * scale));
+      height = Math.max(1, Math.round(height * scale));
+      const canvas = document.createElement("canvas");
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return file;
+      ctx.drawImage(img, 0, 0, width, height);
+      let quality = JPEG_QUALITY;
+      let blob = await canvasToBlob(canvas, quality);
+      while (blob && blob.size > MAX_BYTES && quality > 0.45) {
+        quality -= 0.1;
+        blob = await canvasToBlob(canvas, quality);
+      }
+      if (!blob) return file;
+      const base = (file.name || "photo").replace(/\.[^.]+$/, "") || "photo";
+      return new File([blob], `${base}.jpg`, { type: "image/jpeg", lastModified: Date.now() });
+    } catch (_) {
+      return file;
+    }
+  };
+
+  form.addEventListener("submit", async (event) => {
+    if (form.dataset.submitting === "1") {
+      event.preventDefault();
+      return;
+    }
+    event.preventDefault();
+    form.dataset.submitting = "1";
+    const originalLabel = submitBtn ? submitBtn.textContent : "";
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Sending…";
+    }
+
+    const fallbackNative = () => {
+      form.dataset.submitting = "0";
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalLabel;
+      }
+      HTMLFormElement.prototype.submit.call(form);
+    };
+
+    try {
+      const photoInputs = form.querySelectorAll('input[type="file"]');
+      for (const input of photoInputs) {
+        const file = input.files && input.files[0];
+        if (!file) continue;
+        const compressed = await compressFile(file);
+        if (compressed !== file && typeof DataTransfer !== "undefined") {
+          const dt = new DataTransfer();
+          dt.items.add(compressed);
+          input.files = dt.files;
+        }
+      }
+
+      const body = new FormData(form);
+      if (!body.get("form-name")) body.set("form-name", form.getAttribute("name") || "quote");
+
+      const response = await fetch(window.location.pathname || "/", {
+        method: "POST",
+        body,
+        headers: { Accept: "application/json" },
+      });
+
+      if (!response.ok) throw new Error(`submit failed: ${response.status}`);
+      window.location.href = "/thank-you.html";
+    } catch (_) {
+      fallbackNative();
     }
   });
 });
