@@ -5,9 +5,14 @@
 /house-clearance-barnet /house-clearance-barnet.html 200
 /clearance-barnet /clearance-barnet.html 200
 /house-clearance-enfield /house-clearance-enfield.html 200
+/office-clearance /office-clearance.html 200
 /rubbish-removal /rubbish-removal.html 200
 /terms /terms.html 200
 /faq /faq.html 200
+/house-clearance-haringey /house-clearance-haringey.html 200
+/house-clearance-islington /house-clearance-islington.html 200
+/house-clearance-camden /house-clearance-camden.html 200
+/house-clearance-harrow /house-clearance-harrow.html 200
 http://turnbright.co.uk/* https://turnbright.co.uk/:splat 301!
 http://www.turnbright.co.uk/* https://turnbright.co.uk/:splat 301!
 https://www.turnbright.co.uk/* https://turnbright.co.uk/:splat 301!
