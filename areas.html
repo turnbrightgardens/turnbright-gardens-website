@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7GM6LPHPRT"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-7GM6LPHPRT');
-    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="/assets/favicon.ico" sizes="any" />
@@ -54,7 +45,8 @@
           { "@type": "ListItem", "position": 2, "name": "Areas We Cover", "item": "https://turnbright.co.uk/areas" }
         ]
       }
-    </script>    <link rel="stylesheet" href="styles.css" />
+    </script>    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <header class="site-header solid-header">
@@ -84,6 +76,7 @@
             <a href="/rubbish-removal">Rubbish &amp; Waste Removal</a>
             <span class="nav-dropdown-divider" aria-hidden="true"></span>
             <a href="/office-clearance">Office Clearance London</a>
+            <a href="/probate-clearance">Probate Clearance</a>
             <a href="gardening.html">Gardening</a>
             <a href="landscaping.html">Landscaping</a>
           </div>
@@ -102,6 +95,23 @@
         <p>
           Gardening, landscaping and house clearance across London boroughs, Hertfordshire and Essex towns.
         </p>
+      </section>
+
+
+      <section class="areas-map-section" aria-label="Service area map">
+        <figure class="areas-map-card">
+          <div
+            class="areas-map"
+            id="areas-map"
+            data-areas-map
+            data-lat="51.6415"
+            data-lng="-0.1664"
+            data-radius-km="25"
+            role="img"
+            aria-label="Map centred on East Barnet showing an approximate 25 kilometre service area"
+          ></div>
+          <figcaption>Our main service area</figcaption>
+        </figure>
       </section>
 
       <section class="section">
@@ -383,6 +393,7 @@
         <a href="gardening.html">Gardening</a>
         <a href="landscaping.html">Landscaping</a>
         <a href="/house-clearance">House Clearance</a>
+        <a href="/probate-clearance">Probate Clearance</a>
         <a href="/rubbish-removal">Rubbish Removal</a>
         <a href="areas.html">Areas We Cover</a>
         <a href="faq.html">FAQ</a>

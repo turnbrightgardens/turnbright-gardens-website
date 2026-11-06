@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7GM6LPHPRT"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-7GM6LPHPRT');
-    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="/assets/favicon.ico" sizes="any" />
@@ -109,6 +100,7 @@
             <a href="/rubbish-removal">Rubbish &amp; Waste Removal</a>
             <span class="nav-dropdown-divider" aria-hidden="true"></span>
             <a href="/office-clearance">Office Clearance London</a>
+            <a href="/probate-clearance">Probate Clearance</a>
             <a href="gardening.html">Gardening</a>
             <a href="landscaping.html">Landscaping</a>
           </div>
@@ -204,17 +196,24 @@
               <label>Phone
                 <input type="tel" name="phone" autocomplete="tel" required />
               </label>
-              <label>Postcode
+              <label class="quote-span-2">Postcode
                 <input type="text" name="postcode" autocomplete="postal-code" required />
               </label>
               <label>Floor
                 <select name="floor" required>
-                  <option value="">Choose</option>
-                  <option value="Ground">Ground</option>
-                  <option value="1st">1st</option>
-                  <option value="2nd">2nd</option>
-                  <option value="3rd+">3rd+</option>
-                  <option value="Lift available">Lift available</option>
+                  <option value="" disabled selected>Select floor</option>
+                  <option value="Ground floor">Ground floor</option>
+                  <option value="1st floor">1st floor</option>
+                  <option value="2nd floor">2nd floor</option>
+                  <option value="3rd floor or higher">3rd floor or higher</option>
+                </select>
+              </label>
+              <label>Lift?
+                <select name="lift">
+                  <option value="" disabled selected>Select</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                  <option value="Not sure">Not sure</option>
                 </select>
               </label>
             </div>
@@ -316,8 +315,8 @@
             <p>Fencing, gravel-grid parking, artificial turf, rolled turf and decking quoted from photos and measurements.</p>
           </article>
           <article class="service-card">
-            <h3><a href="/house-clearance">House Clearance</a></h3>
-            <p>Furniture, appliances, mixed waste, bags and general rubbish removed with an upfront quote.</p>
+            <h3><a href="/house-clearance">House &amp; Probate Clearance</a></h3>
+            <p>Full and part house clearances, plus respectful <a href="/probate-clearance">probate clearances</a> for families, executors and solicitors.</p>
           </article>
           <article class="service-card">
             <h3><a href="/office-clearance">Office Clearance</a></h3>
@@ -751,7 +750,7 @@
           </div>
         </article>
         <div class="review-controls" aria-label="Review slideshow controls">
-          <button class="review-nav" type="button" data-review-prev>Previous</button>
+          <button class="review-nav" type="button" data-review-prev aria-label="Previous review">Prev</button>
           <div class="review-dots" role="tablist" aria-label="Choose review">
             <button class="review-dot is-active" type="button" data-review-dot="0" aria-label="Show review 1" aria-selected="true"></button>
             <button class="review-dot" type="button" data-review-dot="1" aria-label="Show review 2" aria-selected="false"></button>
@@ -778,8 +777,8 @@
             <button class="review-dot" type="button" data-review-dot="22" aria-label="Show review 23" aria-selected="false"></button>
             <button class="review-dot" type="button" data-review-dot="23" aria-label="Show review 24" aria-selected="false"></button>
             <button class="review-dot" type="button" data-review-dot="24" aria-label="Show review 25" aria-selected="false"></button>
-          </div
-          <button class="review-nav" type="button" data-review-next>Next</button>
+          </div>
+          <button class="review-nav" type="button" data-review-next aria-label="Next review">Next</button>
         </div>
       </div>
     </section>
@@ -793,6 +792,7 @@
         <a href="gardening.html">Gardening</a>
         <a href="landscaping.html">Landscaping</a>
         <a href="/house-clearance">House Clearance</a>
+        <a href="/probate-clearance">Probate Clearance</a>
         <a href="/rubbish-removal">Rubbish Removal</a>
         <a href="areas.html">Areas We Cover</a>
         <a href="faq.html">FAQ</a>
