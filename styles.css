@@ -3794,3 +3794,109 @@ body:has(.site-header.nav-open) .sticky-whatsapp {
     padding-bottom: 2px;
   }
 }
+
+
+/* Analytics choice: Accept and Reject share one style. */
+.analytics-choice {
+  position: fixed;
+  z-index: 60;
+  left: 16px;
+  bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: min(560px, calc(100% - 200px));
+  margin: 0;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--white);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+}
+
+.analytics-choice[hidden] {
+  display: none !important;
+}
+
+.analytics-choice p {
+  margin: 0;
+  flex: 1 1 auto;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.analytics-choice-actions {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 8px;
+}
+
+.analytics-choice-actions button {
+  flex: 1 1 0;
+  min-width: 104px;
+  min-height: 44px;
+  padding: 8px 14px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--ink);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.analytics-choice-actions button:hover,
+.analytics-choice-actions button:focus-visible {
+  background: var(--mist);
+  outline: 3px solid var(--leaf);
+  outline-offset: 2px;
+}
+
+.analytics-choice-reopen {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: rgba(255, 255, 255, 0.86);
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.analytics-choice-reopen:focus-visible {
+  outline: 2px solid var(--white);
+  outline-offset: 3px;
+}
+
+body:has(.site-header.nav-open) .analytics-choice {
+  display: none !important;
+}
+
+body:has(.analytics-choice:not([hidden])) {
+  padding-bottom: 200px;
+  scroll-padding-bottom: 200px;
+}
+
+@media (max-width: 720px) {
+  .analytics-choice {
+    left: 8px;
+    right: 8px;
+    bottom: calc(64px + env(safe-area-inset-bottom));
+    flex-direction: column;
+    align-items: stretch;
+    width: auto;
+    gap: 10px;
+  }
+
+  .analytics-choice-actions button {
+    min-width: 0;
+  }
+
+  body:has(.analytics-choice:not([hidden])) {
+    padding-bottom: calc(220px + env(safe-area-inset-bottom));
+    scroll-padding-bottom: calc(220px + env(safe-area-inset-bottom));
+  }
+}
+

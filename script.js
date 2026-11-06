@@ -593,9 +593,151 @@ document.querySelectorAll(".quote-form").forEach((form) => {
   }
 })();
 
-/* Analytics: quote success and contact clicks only. Never send form fields. */
+/* Analytics stays off until Accept. Events carry no form fields. */
+const analyticsChoiceKey = "tb-analytics-choice";
+const analyticsMeasurementId = "G-7GM6LPHPRT";
+let analyticsCollectAllowed = false;
+let notifyLeadSent = null;
+
+const watchLead = (url, body) => {
+  if (!notifyLeadSent) return;
+  const blob = `${url || ""} ${typeof body === "string" ? body : ""}`;
+  if (!blob.includes("generate_lead")) return;
+  const notify = notifyLeadSent;
+  notifyLeadSent = null;
+  notify();
+};
+
+const readAnalyticsChoice = () => {
+  try {
+    return localStorage.getItem(analyticsChoiceKey);
+  } catch (_) {
+    return null;
+  }
+};
+
+const storeAnalyticsChoice = (choice) => {
+  try {
+    localStorage.setItem(analyticsChoiceKey, choice);
+  } catch (_) {}
+};
+
+const analyticsAllowed = () =>
+  analyticsCollectAllowed && readAnalyticsChoice() === "accepted";
+
+const analyticsUrlKind = (value) => {
+  try {
+    const url = new URL(String(value), window.location.href);
+    const host = url.hostname;
+    if (host === "simpleanalyticscdn.com" || host.endsWith(".simpleanalyticscdn.com")) return "blocked";
+    if (host === "doubleclick.net" || host.endsWith(".doubleclick.net")) return "blocked";
+    if (
+      host === "analytics.google.com" ||
+      host.endsWith(".analytics.google.com") ||
+      host === "google-analytics.com" ||
+      host.endsWith(".google-analytics.com")
+    ) {
+      return "ga";
+    }
+    if (host === "www.google.com" && url.pathname.startsWith("/g/collect")) return "ga";
+    if (host === "www.googletagmanager.com" && url.pathname.includes("/gtag/js")) return "ga-script";
+  } catch (_) {}
+  return "";
+};
+
+const analyticsRequestBlocked = (value) => {
+  const kind = analyticsUrlKind(value);
+  if (kind === "blocked") return true;
+  if ((kind === "ga" || kind === "ga-script") && !analyticsCollectAllowed) return true;
+  return false;
+};
+
+(() => {
+  const originalFetch = window.fetch;
+  if (typeof originalFetch === "function") {
+    window.fetch = function (input, init) {
+      const url = typeof input === "string" ? input : input && input.url;
+      if (analyticsRequestBlocked(url)) return Promise.resolve(new Response(null, { status: 204 }));
+      const pending = originalFetch.call(this, input, init);
+      const blob = `${url || ""} ${init && typeof init.body === "string" ? init.body : ""}`;
+      if (notifyLeadSent && blob.includes("generate_lead")) {
+        const notify = notifyLeadSent;
+        notifyLeadSent = null;
+        pending.finally(notify);
+      }
+      return pending;
+    };
+  }
+  if (navigator.sendBeacon) {
+    const originalBeacon = navigator.sendBeacon.bind(navigator);
+    navigator.sendBeacon = (url, data) => {
+      if (analyticsRequestBlocked(url)) return true;
+      watchLead(url, data);
+      return originalBeacon(url, data);
+    };
+  }
+  const descriptor = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, "src");
+  if (descriptor && descriptor.set && descriptor.get) {
+    Object.defineProperty(HTMLImageElement.prototype, "src", {
+      configurable: true,
+      enumerable: descriptor.enumerable,
+      get() {
+        return descriptor.get.call(this);
+      },
+      set(value) {
+        if (analyticsRequestBlocked(value)) return;
+        watchLead(value, "");
+        descriptor.set.call(this, value);
+      },
+    });
+  }
+})();
+
+const clearAnalyticsCookies = () => {
+  const names = document.cookie
+    .split(";")
+    .map((part) => part.split("=")[0].trim())
+    .filter((name) => name === "_gid" || name === "_gat" || name.startsWith("_ga") || name.startsWith("_gac"));
+  const host = window.location.hostname;
+  const domains = ["", host, host ? `.${host}` : ""];
+  const labels = host.split(".");
+  if (labels.length >= 2) domains.push(`.${labels.slice(-2).join(".")}`);
+  names.forEach((name) => {
+    domains.forEach((domain) => {
+      const domainAttr = domain ? `; domain=${domain}` : "";
+      document.cookie = `${name}=; Max-Age=0; path=/${domainAttr}`;
+      document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/${domainAttr}`;
+    });
+  });
+};
+
+const stopAnalytics = () => {
+  analyticsCollectAllowed = false;
+  window[`ga-disable-${analyticsMeasurementId}`] = true;
+  window.gtag = function () {};
+  clearAnalyticsCookies();
+};
+
+const loadAnalytics = () => {
+  analyticsCollectAllowed = true;
+  window[`ga-disable-${analyticsMeasurementId}`] = false;
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () {
+    window.dataLayer.push(arguments);
+  };
+  window.gtag("js", new Date());
+  window.gtag("config", analyticsMeasurementId);
+  if (!document.querySelector("script[data-tb-analytics]")) {
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${analyticsMeasurementId}`;
+    script.setAttribute("data-tb-analytics", "ga4");
+    document.head.appendChild(script);
+  }
+};
+
 const reportAnalytics = (eventName, params) => {
-  if (typeof window.gtag !== "function") return;
+  if (!analyticsAllowed() || typeof window.gtag !== "function") return;
   window.gtag("event", eventName, params);
 };
 
@@ -608,7 +750,7 @@ const reportQuoteSuccess = (form) => {
     go();
     return;
   }
-  if (typeof window.gtag !== "function") {
+  if (!analyticsAllowed() || typeof window.gtag !== "function") {
     go();
     return;
   }
@@ -616,15 +758,13 @@ const reportQuoteSuccess = (form) => {
   const finish = () => {
     if (done) return;
     done = true;
+    notifyLeadSent = null;
     go();
   };
-  window.setTimeout(finish, 1000);
+  notifyLeadSent = finish;
+  window.setTimeout(finish, 8000);
   try {
-    window.gtag("event", "generate_lead", {
-      method: "quote_form",
-      transport_type: "beacon",
-      event_callback: finish,
-    });
+    window.gtag("event", "generate_lead", { method: "quote_form" });
   } catch (_) {
     finish();
   }
@@ -651,6 +791,67 @@ document.addEventListener("click", (event) => {
   reportAnalytics("contact_click", {
     method,
     placement,
-    transport_type: "beacon",
   });
 });
+
+(() => {
+  const region = document.createElement("div");
+  region.className = "analytics-choice";
+  region.setAttribute("role", "region");
+  region.setAttribute("aria-labelledby", "analytics-choice-title");
+  region.innerHTML =
+    '<p id="analytics-choice-title">Allow Google Analytics? It sets cookies. The site works either way.</p>' +
+    '<div class="analytics-choice-actions">' +
+    '<button type="button" data-analytics-choice="accepted">Accept</button>' +
+    '<button type="button" data-analytics-choice="rejected">Reject</button>' +
+    "</div>";
+
+  const showChoice = (focusFirst) => {
+    region.hidden = false;
+    if (focusFirst) region.querySelector("button")?.focus();
+  };
+  const hideChoice = () => {
+    region.hidden = true;
+  };
+
+  const applyChoice = (choice) => {
+    if (choice === "accepted" && analyticsCollectAllowed) {
+      hideChoice();
+      return;
+    }
+    storeAnalyticsChoice(choice);
+    if (choice === "rejected") {
+      stopAnalytics();
+      hideChoice();
+      return;
+    }
+    if (document.querySelector("script[data-tb-analytics]")) {
+      window.location.reload();
+      return;
+    }
+    loadAnalytics();
+    hideChoice();
+  };
+
+  region.addEventListener("click", (event) => {
+    const button = event.target.closest("button[data-analytics-choice]");
+    if (!button) return;
+    applyChoice(button.getAttribute("data-analytics-choice"));
+  });
+
+  const stored = readAnalyticsChoice();
+  if (stored === "accepted" || stored === "rejected") region.hidden = true;
+  document.body.insertBefore(region, document.body.firstChild);
+
+  const reopen = document.createElement("button");
+  reopen.type = "button";
+  reopen.className = "analytics-choice-reopen";
+  reopen.textContent = "Analytics choices";
+  reopen.addEventListener("click", () => showChoice(true));
+  const footerLinks = document.querySelector(".footer-links");
+  if (footerLinks) footerLinks.appendChild(reopen);
+  else document.body.appendChild(reopen);
+
+  if (stored === "accepted") loadAnalytics();
+  else if (stored === "rejected") stopAnalytics();
+})();
