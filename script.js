@@ -934,3 +934,32 @@ document.addEventListener("click", (event) => {
     addToggle(pills, pills, "Show more");
   });
 })();
+
+/* Phones: show the Call/WhatsApp bar once the visitor scrolls ~300px.
+   Without JavaScript the bar simply stays visible as before. */
+(() => {
+  const bar = document.querySelector(".mobile-cta-bar");
+  if (!bar) return;
+  document.documentElement.classList.add("cta-scroll");
+  const threshold = 300;
+  let ticking = false;
+  const update = () => {
+    ticking = false;
+    const roomToScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const show = window.scrollY > threshold || roomToScroll < threshold;
+    bar.classList.toggle("is-shown", show);
+  };
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (!ticking) {
+        ticking = true;
+        window.requestAnimationFrame(update);
+      }
+    },
+    { passive: true }
+  );
+  window.addEventListener("resize", update);
+  bar.addEventListener("focusin", () => bar.classList.add("is-shown"));
+  update();
+})();
