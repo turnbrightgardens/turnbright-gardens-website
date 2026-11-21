@@ -827,3 +827,110 @@ document.addEventListener("click", (event) => {
   if (stored === "accepted") loadAnalytics();
   else if (stored === "rejected") stopAnalytics();
 })();
+
+/* Phones: shorter text with "Read more" / "Show more".
+   Every word stays in the page; the toggles and collapsing only apply
+   inside the max-width: 640px CSS block, so desktop is unchanged. */
+(() => {
+  const countWords = (el) => (el.textContent.trim().match(/\S+/g) || []).length;
+  const skip =
+    "header, footer, form, details, nav, .review-carousel, .reviews-section, .analytics-choice, .price-card, " +
+    ".garden-option-list, .garden-option-heading, .garden-option-rate, .additional-rate, .rubbish-prices, " +
+    ".waste-prices, figure, .trust-badges, .mobile-cta-bar, .clearance-review-topline, .ba-card, .quote-form-section";
+  const skipParagraph =
+    ".eyebrow, .form-hint, .hidden-field, .clearance-hero-trust, .hero-links, .hero-copy, .trust-kicker, " +
+    ".clearance-areas-link, .clearance-reviews-summary, .clearance-review-card p, .service-card p, .service-path-card p";
+  const done = new Set();
+  let count = 0;
+
+  const addToggle = (group, after, moreLabel) => {
+    if (!group.id) group.id = `m-more-${++count}`;
+    group.classList.add("m-group");
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "m-more";
+    button.setAttribute("aria-controls", group.id);
+    button.setAttribute("aria-expanded", "false");
+    button.textContent = moreLabel;
+    button.addEventListener("click", () => {
+      const open = group.classList.toggle("m-open");
+      button.setAttribute("aria-expanded", String(open));
+      button.textContent = open ? "Show less" : moreLabel;
+    });
+    after.insertAdjacentElement("afterend", button);
+  };
+
+  // Hero: keep headline, a two-line lead, the short same-day line and buttons.
+  document.querySelectorAll(".page-hero").forEach((hero) => {
+    const lead = hero.querySelector(":scope > p:not(.eyebrow):not(.clearance-hero-trust)");
+    if (!lead) return;
+    const extras = [...hero.querySelectorAll(":scope > .hero-actions ~ p, :scope > .rubbish-mobile-number")];
+    done.add(lead);
+    if (countWords(lead) <= 14 && !extras.length) return;
+    if (countWords(lead) > 14) lead.classList.add("m-clamp");
+    extras.forEach((p) => p.classList.add("m-extra"));
+    addToggle(hero, lead, "Read more");
+  });
+
+  // Text blocks: first paragraph as a two-line lead, the rest behind "Read more".
+  const groups = new Map();
+  document.querySelectorAll("main p, body > section p, section p").forEach((p) => {
+    if (done.has(p) || p.matches(skipParagraph) || p.closest(skip) || p.closest(".page-hero")) return;
+    if (!countWords(p)) return;
+    const parent = p.parentElement;
+    if (!groups.has(parent)) groups.set(parent, []);
+    groups.get(parent).push(p);
+  });
+  groups.forEach((paras, parent) => {
+    const total = paras.reduce((sum, p) => sum + countWords(p), 0);
+    if (total <= 18) return;
+    const [lead, ...rest] = paras;
+    if (countWords(lead) > 14) lead.classList.add("m-clamp");
+    rest.forEach((p) => p.classList.add("m-extra"));
+    if (!lead.classList.contains("m-clamp") && !rest.length) return;
+    addToggle(parent, lead, "Read more");
+  });
+
+  // Bullet lists: first 3 points, the rest behind "Show more".
+  document.querySelectorAll("section ul, aside ul").forEach((list) => {
+    if (list.closest(skip) || list.matches(".clearance-steps, .trust-badges-list")) return;
+    const items = [...list.children];
+    if (items.length <= 4) return;
+    items.slice(3).forEach((li) => li.classList.add("m-extra"));
+    addToggle(list, list, "Show more");
+  });
+
+  // Card lists: first 3 cards with two-line text, the rest behind "Show more".
+  document.querySelectorAll(".clearance-steps").forEach((list) => {
+    if (list.closest(skip)) return;
+    const items = [...list.children];
+    let changed = false;
+    items.slice(3).forEach((li) => {
+      li.classList.add("m-extra");
+      changed = true;
+    });
+    list.querySelectorAll(":scope > li p").forEach((p) => {
+      if (countWords(p) > 14 && !p.closest(".check-list")) {
+        p.classList.add("m-clamp");
+        changed = true;
+      }
+    });
+    if (changed) addToggle(list, list, "Show more");
+  });
+
+  // Review cards: first 2, the rest behind "Show more".
+  document.querySelectorAll(".clearance-review-grid").forEach((grid) => {
+    const cards = [...grid.children];
+    if (cards.length <= 2) return;
+    cards.slice(2).forEach((card) => card.classList.add("m-extra"));
+    addToggle(grid, grid, "Show more");
+  });
+
+  // Area name lists: first 6 names, the rest behind "Show more".
+  document.querySelectorAll(".area-pills").forEach((pills) => {
+    const items = [...pills.children].filter((el) => el.matches("span, a"));
+    if (items.length <= 8) return;
+    items.slice(6).forEach((el) => el.classList.add("m-extra"));
+    addToggle(pills, pills, "Show more");
+  });
+})();
